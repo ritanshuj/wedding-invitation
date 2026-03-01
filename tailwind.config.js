@@ -1,29 +1,31 @@
 /** @type {import('tailwindcss').Config} */
-module.exports = {
+export default {
   content: [
-    "./src/**/*.{js,jsx,ts,tsx}",
-    "./public/index.html"
+    "./index.html",
+    "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
     extend: {
       colors: {
-        maroon: {
-          DEFAULT: '#800000',
-          dark: '#5C0A0A',
-          deep: '#400000'
-        },
-        gold: {
-          DEFAULT: '#D4AF37',
-          light: '#F4CF67',
-          dark: '#B8860B'
-        },
-        saffron: '#FF9933',
-        cream: '#FFFDD0'
+        'royal-maroon': '#5C0A0A',
+        'rich-gold': '#D4AF37',
+        'saffron': '#FF9933',
+        'champagne': '#F7E7CE',
       },
       fontFamily: {
         serif: ['"Playfair Display"', 'serif'],
-        body: ['Montserrat', 'sans-serif'],
-        devanagari: ['"Noto Sans Devanagari"', 'sans-serif']
+        sans: ['Montserrat', 'sans-serif'],
+        hindi: ['"Noto Sans Devanagari"', 'sans-serif'],
+      },
+      animation: {
+        'slow-pulse': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+        'float': 'float 6s ease-in-out infinite',
+      },
+      keyframes: {
+        float: {
+          '0%, 100%': { transform: 'translateY(0)' },
+          '50%': { transform: 'translateY(-20px)' },
+        }
       }
     },
   },

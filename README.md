@@ -1,37 +1,22 @@
-# Ritanshu & Ria Wedding Invitation
+# Premium Wedding Invitation: Ritanshu & Ria
 
-A grand, luxurious North Indian Buddhist wedding invitation web page.
+A modern, high-end digital invitation designed with architectural spacing, premium typography, and vibrant textures.
 
-## Key Features
-- **Vibrant Theme**: Royal Maroon and Gold color palette.
-- **Buddhist Essence**: Features a glowing Buddha centerpiece and Namo Buddhaya mantra.
-- **Relative Motion**: Advanced parallax and scroll animations using Framer Motion.
-- **Happening Vibe**: Animated petal falls (marigolds/jasmine), dhol emoji pulses, and vibrant gradients.
-- **Sticky Countdown**: Live timer fixed to the top.
-- **Ambient Music**: Buddhist-inspired fusion background music player.
-- **Mobile Friendly**: Fully responsive with flexible layouts and readable typography on small screens.
+## Design Philosophy
+- **Luxury Aesthetic**: Deep Royal Maroon (#5C0A0A) and Rich Gold (#D4AF37) palette.
+- **Vibrant Energy**: Animated Buddha outline, marigold petal shower, and parallax backgrounds.
+- **Architectural Layout**: Clean grids and premium Serif (Playfair Display) headings.
+- **Mobile First**: Optimized for seamless viewing on small screens.
 
-## Setup Instructions
+## Technical Fixes
+- **Vercel Build fix**: Included `vercel.json` pointing to the `dist` folder.
+- **Media Reliability**: Integrated high-quality AI-generated backgrounds.
+- **Modern Stack**: Vite + React + Framer Motion.
 
-1. **Install Dependencies**:
-   ```bash
-   npm install
-   ```
-
-2. **Start Development Server**:
-   ```bash
-   npm start
-   ```
-
-3. **Build for Production**:
-   ```bash
-   npm run build
-   ```
-
-## Customizable Sections
-- **App.js**: Main logic, dates, and names.
-- **tailwind.config.js**: Color and font themes.
-- **PetalFall.js**: Particle animation details.
+## Setup
+1. `npm install`
+2. `npm run dev` (Development)
+3. `npm run build` (Production)
 
 ---
-Created with ❤️ for Ritanshu & Ria.
+Designed for a 'Happening' Buddhist celebration.
