@@ -5,31 +5,33 @@
 @layer base {
   body {
     @apply text-champagne antialiased;
+    background: #1A0101;
   }
 }
 
-.gold-gradient {
-  background: linear-gradient(to right, #BF953F, #FCF6BA, #B38728, #FBF5B7, #AA771C);
+.gold-text {
+  background: linear-gradient(135deg, #BF953F 0%, #FCF6BA 45%, #B38728 70%, #FBF5B7 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
-.gold-border {
-  border-image: linear-gradient(to right, #BF953F, #FBF5B7, #AA771C) 1;
+.glass-card {
+  background: rgba(45, 5, 5, 0.3);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(212, 175, 55, 0.15);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
 }
 
-.glass {
-  background: rgba(92, 10, 10, 0.4);
-  backdrop-filter: blur(8px);
-  border: 1px solid rgba(212, 175, 55, 0.2);
+.vertical-line {
+  background: linear-gradient(to bottom, transparent, #D4AF37 15%, #D4AF37 85%, transparent);
 }
 
 ::-webkit-scrollbar {
-  width: 5px;
+  width: 4px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #2D0505;
+  background: #1A0101;
 }
 
 ::-webkit-scrollbar-thumb {

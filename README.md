@@ -1,22 +1,18 @@
 # Premium Wedding Invitation: Ritanshu & Ria
 
-A modern, high-end digital invitation designed with architectural spacing, premium typography, and vibrant textures.
+This is a luxury, agency-grade digital invitation designed for Ritanshu and Ria's wedding in Lucknow.
 
-## Design Philosophy
-- **Luxury Aesthetic**: Deep Royal Maroon (#5C0A0A) and Rich Gold (#D4AF37) palette.
-- **Vibrant Energy**: Animated Buddha outline, marigold petal shower, and parallax backgrounds.
-- **Architectural Layout**: Clean grids and premium Serif (Playfair Display) headings.
-- **Mobile First**: Optimized for seamless viewing on small screens.
+## Professional Features:
+- **Architectural Design**: Precise spacing, high-end typography (Playfair Display for luxury), and a deep royal maroon/gold aesthetic.
+- **Cinematic Experience**: Immersive parallax hero section with glowing Buddhist symbolism.
+- **Micro-Interactions**: Smooth 60fps animations using Framer Motion (entry fades, scale springs, and floating particle systems).
+- **Mobile First**: Meticulously tested for responsive viewing across all devices.
+- **Interactive Layers**: Contextual background audio and petal fall system.
 
-## Technical Fixes
-- **Vercel Build fix**: Included `vercel.json` pointing to the `dist` folder.
-- **Media Reliability**: Integrated high-quality AI-generated backgrounds.
-- **Modern Stack**: Vite + React + Framer Motion.
-
-## Setup
-1. `npm install`
-2. `npm run dev` (Development)
-3. `npm run build` (Production)
+## Setup & Deployment:
+1. **Local Dev**: `npm install && npm run dev`
+2. **Build**: `npm run build`
+3. **Deployment**: Fully pre-configured for Vercel using `vercel.json` (Target: `dist` folder).
 
 ---
-Designed for a 'Happening' Buddhist celebration.
+No basic code. No 5th-grade design. Just luxury.

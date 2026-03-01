@@ -7,10 +7,11 @@ export default {
   theme: {
     extend: {
       colors: {
-        'royal-maroon': '#5C0A0A',
+        'royal-maroon': '#2D0505',
         'rich-gold': '#D4AF37',
         'saffron': '#FF9933',
         'champagne': '#F7E7CE',
+        'deep-brown': '#1A0101',
       },
       fontFamily: {
         serif: ['"Playfair Display"', 'serif'],
