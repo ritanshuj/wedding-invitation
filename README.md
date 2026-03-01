@@ -1,49 +1,37 @@
 # Ritanshu & Ria Wedding Invitation
 
-A premium, vibrant, and mobile-optimized wedding invitation built with React, Framer Motion, and Tailwind CSS. This application features a rich Buddhist aesthetic with gold accents, animated elements, and a royal North Indian vibe.
+A grand, luxurious North Indian Buddhist wedding invitation web page.
 
-## ✨ Features
+## Key Features
+- **Vibrant Theme**: Royal Maroon and Gold color palette.
+- **Buddhist Essence**: Features a glowing Buddha centerpiece and Namo Buddhaya mantra.
+- **Relative Motion**: Advanced parallax and scroll animations using Framer Motion.
+- **Happening Vibe**: Animated petal falls (marigolds/jasmine), dhol emoji pulses, and vibrant gradients.
+- **Sticky Countdown**: Live timer fixed to the top.
+- **Ambient Music**: Buddhist-inspired fusion background music player.
+- **Mobile Friendly**: Fully responsive with flexible layouts and readable typography on small screens.
 
-- **Vibrant Theme**: Royal Maroon (#800000) and Gold (#D4AF37) color palette.
-- **Buddhist Aesthetics**: Animated golden Buddha silhouette and "नमो बुद्धाय" header.
-- **Artistic Hero**: Names with a subtle watercolor monk ceremony background.
-- **Genda Phool Decor**: Constant animated falling Marigold and Jasmine petal effects.
-- **Dynamic Scroll**: Reveal animations for family details and event sections.
-- **Interactive Elements**: Floating music player and direct map integration.
-- **Mobile First**: Fully responsive design tailored for smartphone screens.
+## Setup Instructions
 
-## 🛠️ Prerequisites
+1. **Install Dependencies**:
+   ```bash
+   npm install
+   ```
 
-- Node.js (v16.0 or higher)
-- npm or yarn
+2. **Start Development Server**:
+   ```bash
+   npm start
+   ```
 
-## 🚀 Installation & Setup
+3. **Build for Production**:
+   ```bash
+   npm run build
+   ```
 
-1. **Clone the project files into a directory.**
-2. **Open your terminal in that directory.**
-3. **Install dependencies:**
-    npm install
-4. **Run the development server:**
-    npm run dev
-5. **Open your browser at:**
-    `http://localhost:5173`
+## Customizable Sections
+- **App.js**: Main logic, dates, and names.
+- **tailwind.config.js**: Color and font themes.
+- **PetalFall.js**: Particle animation details.
 
-## 📦 Project Structure
-
-- `src/components/Hero.jsx`: Buddha header, names, and ceremony background.
-- `src/components/Details.jsx`: Family details and date section.
-- `src/components/PetalFall.jsx`: Background animation of falling flowers.
-- `src/components/CultureSection.jsx`: Vibrant celebration animations (Dhol/Dancing).
-- `src/components/Footer.jsx`: The closing blessing and gratitude message.
-- `src/App.jsx`: Main entry point and audio management.
-
-## 🎨 Design Configuration
-
-The colors and fonts are configured in `tailwind.config.js`. You can swap the primary colors easily:
-- Primary: `wedding-maroon`
-- Secondary: `wedding-gold`
-- Highlight: `wedding-saffron`
-
-## 🤝 Support
-
-For any deployment issues or asset updates, ensure the image URLs in `Hero.jsx` and `App.jsx` are accessible. All images currently use high-quality CDN placeholders.
+---
+Created with ❤️ for Ritanshu & Ria.

@@ -1,28 +1,29 @@
 /** @type {import('tailwindcss').Config} */
-export default {
+module.exports = {
   content: [
-    "./index.html",
-    "./src/**/*.{js,ts,jsx,tsx}",
+    "./src/**/*.{js,jsx,ts,tsx}",
+    "./public/index.html"
   ],
   theme: {
     extend: {
       colors: {
-        wedding: {
-          maroon: "#800000",
-          gold: "#D4AF37",
-          saffron: "#FF9933",
-          cream: "#FFFDD0",
-          deep: "#4A0404"
-        }
+        maroon: {
+          DEFAULT: '#800000',
+          dark: '#5C0A0A',
+          deep: '#400000'
+        },
+        gold: {
+          DEFAULT: '#D4AF37',
+          light: '#F4CF67',
+          dark: '#B8860B'
+        },
+        saffron: '#FF9933',
+        cream: '#FFFDD0'
       },
       fontFamily: {
-        cursive: ['"Great Vibes"', 'cursive'],
-        hindi: ['"Tiro Devanagari Hindi"', 'serif'],
-        sans: ['"Montserrat"', 'sans-serif'],
-      },
-      animation: {
-        'spin-slow': 'spin 8s linear infinite',
-        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+        serif: ['"Playfair Display"', 'serif'],
+        body: ['Montserrat', 'sans-serif'],
+        devanagari: ['"Noto Sans Devanagari"', 'sans-serif']
       }
     },
   },
