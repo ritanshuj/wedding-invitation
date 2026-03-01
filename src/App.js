@@ -1,190 +1,268 @@
 import React, { useRef } from 'react';
-import { motion, useScroll, useSpring, useTransform } from 'framer-motion';
-import Countdown from './components/Countdown';
-import AudioPlayer from './components/AudioPlayer';
-import RSVPForm from './components/RSVPForm';
+import { motion, useScroll, useTransform, useInView } from 'framer-motion';
+import { MapPin, Calendar, Clock, Heart, Music, Sparkles } from 'lucide-react';
+import PetalFall from './components/PetalFall';
+import DecorativeLine from './components/DecorativeLine';
 
-const App = () => {
-  const containerRef = useRef(null);
-  const { scrollYProgress } = useScroll();
-  const pathLength = useSpring(scrollYProgress, { stiffness: 400, damping: 90 });
-
-  // Luxury Parallax Transforms
-  const doliScroll = useTransform(scrollYProgress, [0, 1], ["100%", "-200%"]);
-  const baraatScroll = useTransform(scrollYProgress, [0.3, 1], ["100%", "-100%"]);
-  const buddhaOpacity = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [0, 1, 1, 0]);
-  const buddhaScale = useTransform(scrollYProgress, [0, 0.5], [0.8, 1.2]);
+const Section = ({ children, className, id }) => {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: false, amount: 0.3 });
 
   return (
-    <div ref={containerRef} className="relative bg-texture min-h-[500vh]">
-      {/* Sticky Header */}
-      <header className="sticky top-0 z-[100] bg-white/80 backdrop-blur-md border-b border-luxury-gold/20 shadow-sm">
-        <div className="max-w-7xl mx-auto px-4 py-2 flex flex-col md:flex-row items-center justify-between">
-          <div className="font-serif text-2xl text-luxury-gold flex items-center gap-2">
-             <img src="https://img.icons8.com/color/48/dharmachakra.png" className="w-8 h-8 opacity-70" alt="Dharma" />
-             A & S
-          </div>
-          <Countdown targetDate="2024-12-25T10:00:00" />
-          <div className="hidden md:block font-serif text-luxury-gold italic">Save The Date</div>
-        </div>
-      </header>
+    <motion.section
+      ref={ref}
+      id={id}
+      initial={{ opacity: 0, y: 50 }}
+      animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
+      transition={{ duration: 0.8, ease: "easeOut" }}
+      className={`relative min-h-screen w-full py-20 px-4 flex flex-col items-center justify-center overflow-hidden ${className}`}
+    >
+      {children}
+    </motion.section>
+  );
+};
 
-      {/* Background Connecting Line - Raabta Style */}
-      <div className="fixed inset-0 pointer-events-none z-10 flex justify-center">
-        <svg className="h-full w-2">
-          <motion.path
-            d={`M 1 0 L 1 ${window.innerHeight * 5}`}
-            style={{ pathLength }}
-            stroke="#D4AF37"
-            strokeWidth="3"
-            strokeDasharray="10 5"
-            fill="none"
-          />
-        </svg>
-      </div>
+const App = () => {
+  const targetRef = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: targetRef,
+    offset: ["start start", "end end"]
+  });
+
+  // Parallax transforms
+  const y1 = useTransform(scrollYProgress, [0, 1], [0, -200]);
+  const y2 = useTransform(scrollYProgress, [0, 1], [0, 200]);
+  const rotate = useTransform(scrollYProgress, [0, 1], [0, 45]);
+
+  return (
+    <div ref={targetRef} className="relative watercolor-bg">
+      <PetalFall />
+      <DecorativeLine />
 
       {/* Hero Section */}
-      <section className="relative h-screen flex flex-col items-center justify-center text-center px-4 overflow-hidden">
-        <motion.img 
-          src="https://images.unsplash.com/photo-1542120526-89a7039730ab?auto=format&fit=crop&q=80&w=800" 
-          alt="Golden Buddha"
-          style={{ opacity: buddhaOpacity, scale: buddhaScale }}
-          className="absolute w-[30%] md:w-[20%] object-contain -z-10 brightness-110 grayscale-[30%] opacity-20"
-        />
-        
-        <motion.div 
-          initial={{ opacity: 0, y: 50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1 }}
-          className="z-20"
-        >
-          <span className="font-serif text-luxury-gold text-lg md:text-2xl tracking-[0.5em] mb-4 block uppercase font-light">Om Mani Padme Hum</span>
-          <h1 className="font-serif text-6xl md:text-9xl luxury-text-gradient mb-8 leading-tight">
-            Ananya <br/> & <br/> Sidharth
+      <Section className="bg-transparent">
+        <div className="absolute top-10 flex flex-col items-center z-10">
+          <motion.div 
+            animate={{ rotate: 360 }}
+            transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+            className="w-24 h-24 mb-4"
+          >
+            <svg viewBox="0 0 100 100" className="fill-wedding-gold opacity-80">
+              <path d="M50 0 L60 40 L100 50 L60 60 L50 100 L40 60 L0 50 L40 40 Z" />
+            </svg>
+          </motion.div>
+          <p className="font-serif tracking-[0.3em] text-wedding-gold text-sm uppercase">Namo Buddhaya</p>
+        </div>
+
+        <motion.div style={{ y: y1 }} className="z-20 text-center max-w-4xl mx-auto">
+          <img 
+            src="https://images.unsplash.com/photo-1542369653-b8387140e241?auto=format&fit=crop&q=80&w=800" 
+            alt="Buddha" 
+            className="w-48 h-48 md:w-64 md:h-64 rounded-full mx-auto mb-8 object-cover border-8 border-white shadow-2xl animate-float"
+          />
+          <h1 className="font-handwriting text-5xl md:text-8xl text-wedding-maroon mb-4 text-shadow-gold">
+            Rahul & Sunita
           </h1>
-          <p className="font-sans text-stone-600 max-w-xl mx-auto leading-relaxed text-sm md:text-base tracking-widest px-6">
-            In the presence of the Enlightened One, we embark on a journey of mindfulness, compassion, and eternal union.
+          <p className="font-serif text-lg md:text-2xl text-wedding-gold italic mb-8">
+            Begin their journey of mindfulness and love
           </p>
+          <div className="flex justify-center space-x-4">
+             <div className="h-[1px] w-12 bg-wedding-gold self-center" />
+             <span className="font-serif text-xl tracking-widest uppercase">24 November 2024</span>
+             <div className="h-[1px] w-12 bg-wedding-gold self-center" />
+          </div>
         </motion.div>
-        
+
+        {/* Parallax elements */}
         <motion.div 
-          animate={{ y: [0, 10, 0] }}
-          transition={{ repeat: Infinity, duration: 2 }}
-          className="absolute bottom-10"
+          style={{ y: y2, rotate }}
+          className="absolute -right-20 top-40 w-64 h-64 opacity-10 pointer-events-none"
         >
-          <div className="w-6 h-10 border-2 border-luxury-gold rounded-full flex justify-center p-1">
-            <div className="w-1 h-2 bg-luxury-gold rounded-full" />
-          </div>
+          <img src="https://www.transparentpng.com/download/lotus/pT6j0v-lotus-flower-png.png" alt="" className="w-full" />
         </motion.div>
-      </section>
+      </Section>
 
-      {/* Mehendi Section - Peach Theme */}
-      <section className="relative h-screen bg-luxury-peach/20 flex flex-col md:flex-row items-center justify-center p-10 overflow-hidden">
-        <motion.div style={{ x: doliScroll }} className="absolute whitespace-nowrap opacity-10 pointer-events-none">
-           <img src="https://img.icons8.com/bubbles/200/bridal-shower.png" className="w-64 inline-block mx-20" alt="Art" />
-           <img src="https://img.icons8.com/bubbles/200/bridal-shower.png" className="w-64 inline-block mx-20" alt="Art" />
-        </motion.div>
+      {/* The Story / Invitation Text */}
+      <Section className="bg-wedding-mint/30">
+         <div className="max-w-2xl text-center z-10 px-6">
+            <h2 className="font-serif text-3xl md:text-5xl text-wedding-maroon mb-8">The Union of Souls</h2>
+            <p className="text-lg md:text-xl leading-relaxed font-light mb-6">
+              "Thousands of candles can be lighted from a single candle, and the life of the candle will not be shortened. Happiness never decreases by being shared."
+            </p>
+            <p className="text-md md:text-lg text-wedding-gold font-serif italic mb-12">
+              With the blessings of Lord Buddha, we invite you to celebrate the wedding of our children.
+            </p>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 text-left">
+              <div className="p-6 border border-wedding-gold/20 rounded-lg bg-white/50 backdrop-blur-sm">
+                 <h3 className="font-serif text-xl text-wedding-maroon mb-2">The Groom</h3>
+                 <p className="font-bold">Rahul Vardhan</p>
+                 <p className="text-sm text-gray-600">S/o Mr. & Mrs. Vardhan</p>
+              </div>
+              <div className="p-6 border border-wedding-gold/20 rounded-lg bg-white/50 backdrop-blur-sm">
+                 <h3 className="font-serif text-xl text-wedding-maroon mb-2">The Bride</h3>
+                 <p className="font-bold">Sunita Shakya</p>
+                 <p className="text-sm text-gray-600">D/o Mr. & Mrs. Shakya</p>
+              </div>
+            </div>
+         </div>
+      </Section>
 
-        <div className="max-w-2xl text-center md:text-left z-20">
-          <img src="https://img.icons8.com/external-flatart-icons-flat-flatarticons/100/external-henna-spa-flatart-icons-flat-flatarticons.png" className="mx-auto md:mx-0 mb-6" alt="Henna" />
-          <h2 className="font-serif text-5xl text-luxury-gold mb-4 italic">The Mehendi Ceremony</h2>
-          <p className="font-sans text-stone-600 tracking-wide mb-6">
-            Intricate patterns of joy and love being etched onto the bride's hands, signaling the beginning of our sacred celebration.
-          </p>
-          <div className="p-4 border border-luxury-gold/30 rounded-lg inline-block text-luxury-gold font-bold">
-            23rd Dec | 2:00 PM onwards | Peach Gardens
+      {/* Mehendi - Peach Theme */}
+      <Section className="bg-wedding-peach/20" id="mehendi">
+        <div className="grid md:grid-cols-2 gap-12 items-center max-w-6xl mx-auto">
+          <div className="order-2 md:order-1">
+            <div className="inline-flex items-center px-4 py-2 bg-wedding-peach/40 rounded-full text-wedding-maroon mb-6">
+              <Music className="w-4 h-4 mr-2" />
+              <span className="text-sm uppercase tracking-widest font-bold">The Art of Henna</span>
+            </div>
+            <h2 className="font-serif text-4xl md:text-6xl text-wedding-maroon mb-6">Mehendi Ceremony</h2>
+            <p className="text-lg mb-8 leading-relaxed">
+              Join us for an afternoon of music, dance, and intricate henna designs as we kick off the celebrations.
+            </p>
+            <div className="space-y-4 font-serif">
+              <div className="flex items-center">
+                <Calendar className="w-5 h-5 mr-4 text-wedding-gold" />
+                <span>November 22, 2024</span>
+              </div>
+              <div className="flex items-center">
+                <Clock className="w-5 h-5 mr-4 text-wedding-gold" />
+                <span>11:00 AM onwards</span>
+              </div>
+              <div className="flex items-center">
+                <MapPin className="w-5 h-5 mr-4 text-wedding-gold" />
+                <span>Royal Orchid Garden, New Delhi</span>
+              </div>
+            </div>
+          </div>
+          <div className="order-1 md:order-2 relative">
+            <img 
+              src="https://images.unsplash.com/photo-1590111663118-f297299fd839?auto=format&fit=crop&q=80&w=800" 
+              alt="Mehendi" 
+              className="rounded-t-full border-8 border-white shadow-xl w-full h-[400px] object-cover"
+            />
+            <div className="absolute -bottom-6 -left-6 bg-white p-6 shadow-lg rounded-lg">
+              <p className="font-handwriting text-3xl text-wedding-gold italic">Dress Code: Floral Vibes</p>
+            </div>
           </div>
         </div>
-        <div className="mt-10 md:mt-0 md:ml-20 relative">
-          <img src="https://images.unsplash.com/photo-1610030469618-2e069151c8a1?auto=format&fit=crop&q=80&w=400" className="w-72 h-96 object-cover rounded-[50%_50%_0_0] border-4 border-white shadow-2xl" alt="Mehendi" />
-        </div>
-      </section>
+      </Section>
 
-      {/* Haldi Section - Lavender/Yellow Theme */}
-      <section className="relative h-screen bg-luxury-lavender/30 flex flex-col md:flex-row-reverse items-center justify-center p-10 overflow-hidden">
-        <div className="max-w-2xl text-center md:text-right z-20">
-          <img src="https://img.icons8.com/external-flatart-icons-lineal-color-flatarticons/100/external-spa-wellbeing-flatart-icons-lineal-color-flatarticons.png" className="mx-auto md:ml-auto mb-6" alt="Marigold" />
-          <h2 className="font-serif text-5xl text-luxury-gold mb-4 italic">The Haldi Ritual</h2>
-          <p className="font-sans text-stone-600 tracking-wide mb-6">
-            A golden glow of health and prosperity, as family and friends shower us with turmeric blessings and unbridled joy.
-          </p>
-          <div className="p-4 border border-luxury-gold/30 rounded-lg inline-block text-luxury-gold font-bold">
-            24th Dec | 10:00 AM | Saffron Courtyard
-          </div>
+      {/* Haldi - Saffron/Yellow Theme - Happening Vibe */}
+      <Section className="bg-yellow-50" id="haldi">
+        <div className="absolute inset-0 opacity-10 pointer-events-none overflow-hidden">
+           <div className="absolute top-0 left-0 w-full h-full flex flex-wrap gap-20 p-20">
+              {[...Array(20)].map((_, i) => (
+                <div key={i} className="w-20 h-20 bg-wedding-saffron rounded-full blur-3xl opacity-30" />
+              ))}
+           </div>
         </div>
-        <div className="mt-10 md:mt-0 md:mr-20">
-          <img src="https://images.unsplash.com/photo-1595981267035-7b04ca84a82d?auto=format&fit=crop&q=80&w=400" className="w-72 h-96 object-cover rounded-[50%_0_50%_0] border-4 border-white shadow-2xl" alt="Haldi" />
-        </div>
-      </section>
-
-      {/* The Baraat Parallax */}
-      <div className="h-[50vh] bg-luxury-mint/20 relative flex items-center overflow-hidden">
-        <motion.div style={{ x: baraatScroll }} className="flex gap-40 whitespace-nowrap items-center">
-           <img src="https://img.icons8.com/color/144/trumpet.png" className="w-24" alt="Band" />
-           <img src="https://img.icons8.com/color/144/elephant.png" className="w-48" alt="Elephant" />
-           <img src="https://img.icons8.com/color/144/drum.png" className="w-24" alt="Dhol" />
-           <img src="https://img.icons8.com/color/144/trumpet.png" className="w-24" alt="Band" />
-           <img src="https://img.icons8.com/color/144/dance.png" className="w-32" alt="Dance" />
-           <img src="https://img.icons8.com/color/144/trumpet.png" className="w-24" alt="Band" />
-        </motion.div>
-      </div>
-
-      {/* Wedding Section - Mint/Gold Theme */}
-      <section className="relative min-h-screen bg-luxury-mint/40 py-20 px-4 text-center overflow-hidden">
-        <motion.div 
-          initial={{ opacity: 0, scale: 0.9 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 1 }}
-          className="max-w-4xl mx-auto glass-card rounded-[80px] p-12 border-luxury-gold shadow-2xl"
-        >
-          <img src="https://img.icons8.com/color/96/lotus.png" className="mx-auto mb-8 animate-pulse" alt="Lotus" />
-          <h2 className="font-serif text-6xl text-luxury-gold mb-6">The Wedding Muhurat</h2>
-          <div className="text-xl font-sans text-stone-700 tracking-[0.2em] mb-8">
-            25th DECEMBER 2024
-          </div>
+        <div className="z-10 text-center">
+          <motion.div 
+            animate={{ scale: [1, 1.1, 1] }}
+            transition={{ duration: 2, repeat: Infinity }}
+            className="mb-8"
+          >
+            <Sparkles className="w-12 h-12 text-wedding-saffron mx-auto" />
+          </motion.div>
+          <h2 className="font-serif text-5xl md:text-7xl text-wedding-maroon mb-4">Haldi & Holi</h2>
+          <p className="font-handwriting text-3xl text-wedding-saffron mb-10">Pure Happiness, Golden Memories</p>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 text-left mb-12">
-            <div className="space-y-4">
-              <h4 className="font-serif text-2xl text-luxury-gold italic">The Vows</h4>
-              <p className="text-stone-600 leading-relaxed font-light">
-                Chanting of holy sutras and the exchange of garlands under the Bodhi-leaf inspired Mandap.
-              </p>
-              <div className="font-bold text-luxury-gold">10:00 AM - 1:00 PM</div>
+          <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto px-4">
+             <div className="bg-white/80 p-8 rounded-2xl shadow-xl hover:shadow-2xl transition-shadow border-t-4 border-wedding-saffron">
+                <Clock className="mx-auto mb-4 text-wedding-saffron" />
+                <h4 className="font-bold mb-2">When</h4>
+                <p>Nov 23, 10:00 AM</p>
+             </div>
+             <div className="bg-white/80 p-8 rounded-2xl shadow-xl hover:shadow-2xl transition-shadow border-t-4 border-wedding-saffron scale-110">
+                <img src="https://images.unsplash.com/photo-1621236304195-0c1150822102?auto=format&fit=crop&q=80&w=400" alt="Dhol" className="w-20 h-20 mx-auto rounded-full mb-4 object-cover border-2 border-wedding-saffron animate-bounce" />
+                <h4 className="font-bold mb-2 uppercase tracking-widest">Grand Baraat</h4>
+                <p>Dhol & Dhamaka</p>
+             </div>
+             <div className="bg-white/80 p-8 rounded-2xl shadow-xl hover:shadow-2xl transition-shadow border-t-4 border-wedding-saffron">
+                <MapPin className="mx-auto mb-4 text-wedding-saffron" />
+                <h4 className="font-bold mb-2">Where</h4>
+                <p>The Terrace Suite</p>
+             </div>
+          </div>
+        </div>
+      </Section>
+
+      {/* Main Wedding Ceremony - Mint & Gold */}
+      <Section className="bg-wedding-mint/40" id="wedding">
+        <div className="absolute top-0 left-0 w-full h-full pointer-events-none overflow-hidden flex items-center justify-center opacity-5">
+           <svg viewBox="0 0 100 100" className="w-[80vw] h-[80vw] fill-wedding-gold rotate-45">
+             <path d="M50 0 L100 50 L50 100 L0 50 Z" />
+           </svg>
+        </div>
+
+        <div className="z-10 text-center max-w-4xl mx-auto">
+          <div className="w-24 h-24 mx-auto mb-8 border-2 border-wedding-gold flex items-center justify-center rounded-full">
+            <Heart className="w-10 h-10 text-wedding-gold fill-wedding-gold" />
+          </div>
+          <h2 className="font-serif text-5xl md:text-8xl text-wedding-maroon mb-6">Wedding Ceremony</h2>
+          <p className="font-serif text-xl md:text-2xl text-wedding-gold italic mb-12 tracking-wide">
+            "Under the Bodhi Tree of Love"
+          </p>
+          
+          <div className="bg-white/60 backdrop-blur-md p-10 rounded-3xl border border-wedding-gold/30 shadow-2xl relative">
+            <div className="absolute -top-5 left-1/2 -translate-x-1/2 bg-wedding-gold text-white px-8 py-2 rounded-full font-serif uppercase tracking-[0.2em] text-sm">
+               The Nuptial Vows
             </div>
-            <div className="space-y-4">
-              <h4 className="font-serif text-2xl text-luxury-gold italic">Grand Feast</h4>
-              <p className="text-stone-600 leading-relaxed font-light">
-                A grand North Indian spread curated with mindful recipes and royal flavors.
-              </p>
-              <div className="font-bold text-luxury-gold">1:30 PM Onwards</div>
+            <div className="space-y-8">
+              <div>
+                <p className="uppercase tracking-[0.3em] text-wedding-gold text-xs mb-2">Date & Venue</p>
+                <div className="flex flex-col md:flex-row justify-center items-center space-y-4 md:space-y-0 md:space-x-12">
+                   <div className="text-center">
+                      <p className="text-3xl font-serif">Sunday</p>
+                      <p className="text-xl">Nov 24, 2024</p>
+                   </div>
+                   <div className="h-10 w-[1px] bg-wedding-gold hidden md:block" />
+                   <div className="text-center max-w-xs">
+                      <p className="font-bold">Grand Ballroom</p>
+                      <p className="text-sm">The Leela Palace, Chanakyapuri, New Delhi</p>
+                   </div>
+                </div>
+              </div>
+              
+              <div className="pt-8 border-t border-wedding-gold/20 grid grid-cols-2 gap-4">
+                 <div>
+                    <p className="font-serif text-wedding-maroon text-lg">Departure of Baraat</p>
+                    <p className="text-sm">06:00 PM</p>
+                 </div>
+                 <div>
+                    <p className="font-serif text-wedding-maroon text-lg">Pheras & Blessings</p>
+                    <p className="text-sm">08:00 PM</p>
+                 </div>
+              </div>
             </div>
           </div>
 
-          <div className="border-t border-luxury-gold/20 pt-12">
-            <h4 className="font-serif text-3xl text-luxury-gold mb-6 italic">Venue Location</h4>
-            <p className="mb-6 font-sans">The Grand Orchid Resort, Himalayan Foothills</p>
-            <a 
-              href="https://maps.google.com" 
-              target="_blank" 
-              rel="noreferrer"
-              className="inline-block px-10 py-3 border-2 border-luxury-gold text-luxury-gold hover:bg-luxury-gold hover:text-white transition-all rounded-full uppercase text-xs tracking-[0.3em]"
-            >
-              Get Directions
-            </a>
-          </div>
-        </motion.div>
-      </section>
+          <button className="mt-16 gold-shimmer bg-wedding-maroon text-white px-12 py-4 rounded-full font-serif text-xl tracking-widest uppercase hover:bg-red-900 transition-all shadow-xl">
+             RSVP TO ATTEND
+          </button>
+        </div>
+      </Section>
 
-      {/* RSVP Section */}
-      <section className="py-20 px-4 bg-white">
-        <RSVPForm />
-        <footer className="text-center mt-20">
-          <div className="font-serif text-3xl text-luxury-gold italic mb-2">Happily Ever After</div>
-          <div className="font-sans text-xs tracking-widest text-stone-400 uppercase">Designed with Blessings</div>
-        </footer>
-      </section>
-
-      <AudioPlayer />
+      {/* Footer / Blessing */}
+      <footer className="py-20 bg-white text-center border-t-8 border-wedding-gold">
+         <div className="max-w-2xl mx-auto px-6">
+            <img 
+              src="https://images.unsplash.com/photo-1542385151-efd9000785a0?auto=format&fit=crop&q=80&w=400" 
+              alt="Lotus Logo" 
+              className="w-16 h-16 mx-auto mb-6 opacity-30 grayscale saturate-0"
+            />
+            <p className="font-serif text-2xl text-wedding-maroon mb-2">No Gifts, Only Blessings</p>
+            <p className="text-gray-500 italic mb-8">"Your presence is the most meaningful gift to us."</p>
+            <div className="flex justify-center space-x-6 text-wedding-gold">
+               <span className="text-xs uppercase tracking-[0.5em] font-bold">Compassion</span>
+               <span className="text-xs uppercase tracking-[0.5em] font-bold">•</span>
+               <span className="text-xs uppercase tracking-[0.5em] font-bold">Joy</span>
+               <span className="text-xs uppercase tracking-[0.5em] font-bold">•</span>
+               <span className="text-xs uppercase tracking-[0.5em] font-bold">Love</span>
+            </div>
+            <p className="mt-12 text-[10px] text-gray-300 uppercase tracking-widest">Meticulously crafted for Rahul & Sunita</p>
+         </div>
+      </footer>
     </div>
   );
 };
