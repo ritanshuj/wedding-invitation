@@ -2,38 +2,40 @@
 @tailwind components;
 @tailwind utilities;
 
-.madhubani-border {
-  background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0h40v40H0V0zm20 20c5.523 0 10-4.477 10-10S25.523 0 20 0 10 4.477 10 10s4.477 10 10 10zm0 20c5.523 0 10-4.477 10-10s-4.477-10-10-10-10 4.477-10 10 4.477 10 10 10z' fill='%23800000' fill-opacity='0.1'/%3E%3C/svg%3E");
-}
-
-.fish-pattern {
-  background-image: url("data:image/svg+xml,%3Csvg width='60' height='30' viewBox='0 0 60 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 15c0 8.284-13.431 15-30 15V0c16.569 0 30 6.716 30 15zm30 0c0 8.284-13.431 15-30 15V0c16.569 0 30 6.716 30 15z' fill='%23EBB035' fill-opacity='0.05'/%3E%3C/svg%3E");
-}
-
-.parallax-container {
-  height: 100vh;
-  overflow-y: auto;
-  overflow-x: hidden;
-  perspective: 10px;
-}
-
-.madhubani-left-border {
+.madhubani-border-left {
   position: fixed;
   left: 0;
   top: 0;
   bottom: 0;
   width: 60px;
-  background-color: #800000;
-  z-index: 50;
+  background-color: #3D0101;
+  z-index: 100;
   border-right: 4px double #EBB035;
-  background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23EBB035' fill-opacity='0.4' fill-rule='evenodd'%3E%3Cpath d='M0 40L40 0H20L0 20M40 40V20L20 40'/%3E%3C/g%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 40L40 0H20L0 20M40 40V20L20 40' stroke='%23EBB035' stroke-opacity='0.2' fill='none'/%3E%3C/svg%3E");
 }
 
 @media (max-width: 768px) {
-  .madhubani-left-border { width: 30px; }
-  .main-content { padding-left: 30px; }
+  .madhubani-border-left { width: 35px; }
+  .content-wrapper { padding-left: 35px; }
 }
 
-.main-content {
+.content-wrapper {
   padding-left: 60px;
+}
+
+.gold-luxury-text {
+  background: linear-gradient(135deg, #BF953F 0%, #FCF6BA 45%, #B38728 70%, #FBF5B7 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.madhubani-card {
+  border: 3px solid #3D0101;
+  position: relative;
+  background-color: white;
+}
+
+.parallax-bg {
+  transform: translateZ(-10px) scale(2);
+  z-index: -1;
 }

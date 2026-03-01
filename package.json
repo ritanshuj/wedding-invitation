@@ -1,6 +1,6 @@
 {
-  "name": "ritanshu-ria-madhubani-wedding",
-  "version": "1.0.0",
+  "name": "ritanshu-ria-wedding",
+  "version": "1.2.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -11,7 +11,9 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "framer-motion": "^10.16.4",
-    "lucide-react": "^0.263.1"
+    "lucide-react": "^0.263.1",
+    "clsx": "^2.0.0",
+    "tailwind-merge": "^2.0.0"
   },
   "devDependencies": {
     "@vitejs/plugin-react": "^4.0.0",

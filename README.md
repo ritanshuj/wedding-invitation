@@ -1,25 +1,19 @@
-# Ritanshu & Ria: Madhubani Wedding Invitation
+# Premium Madhubani Wedding Invitation
 
-A premium, vibrant digital invitation inspired by traditional Mithila (Madhubani) art, featuring a luxury maroon hero transition and parallax storytelling.
+A high-end, vibrant digital wedding invitation for Ritanshu and Ria.
 
-## Design Highlights
-- **Vibrant Madhubani Theme**: Deep Maroon, Mustard, Teal, and Indigo color palette.
-- **Architectural Borders**: Fixed Madhubani patterned left border that stays as you scroll.
-- **Parallax Flow**: Smooth scroll transitions with Framer Motion and custom CSS perspective.
-- **Typography Fusion**: Elegant Playfair Display mixed with handwritten Dancing Script and traditional Devanagari.
-- **Cultural Assets**: Hand-drawn SVG illustrations of fish, sun, and patterns.
+## Design Details:
+- **Royal Maroon Hero**: A cinematic start with dark tones and gold lettering.
+- **Madhubani Left Border**: A fixed architectural element that persists during the scroll.
+- **Multi-Vibrant Sections**: Using Mustard, Teal, Indigo, and Orange for a traditional yet modern look.
+- **Parallax Interactions**: Text and cards animate with depth as you scroll.
 
-## Pages
-1. **Premium Hero**: Dark Maroon background with Gold lettering (Buddhist theme).
-2. **Vibrant Story**: Cream background with Teal and Orange accents.
-3. **Heritage Cards**: Multi-colored family information cards.
-4. **The Happening**: Timeline with alternating parallax movements.
-5. **Sacred Footer**: Buddhist blessing request in Deep Indigo.
+## Project Structure:
+- `Vite` for ultra-fast performance.
+- `Framer Motion` for high-end cinematic animations.
+- `Tailwind CSS` for artisanal styling.
 
-## Setup
-- `npm install`
-- `npm run dev`
-- Build for deployment: `npm run build`
-
----
-Luxury meets Tradition.
+## Deployment:
+The project is pre-configured for **Vercel**. Simply push to your repository.
+- Build Command: `npm run build`
+- Output Directory: `dist`
