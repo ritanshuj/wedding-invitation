@@ -1,18 +1,25 @@
-# Premium Wedding Invitation: Ritanshu & Ria
+# Ritanshu & Ria: Madhubani Wedding Invitation
 
-This is a luxury, agency-grade digital invitation designed for Ritanshu and Ria's wedding in Lucknow.
+A premium, vibrant digital invitation inspired by traditional Mithila (Madhubani) art, featuring a luxury maroon hero transition and parallax storytelling.
 
-## Professional Features:
-- **Architectural Design**: Precise spacing, high-end typography (Playfair Display for luxury), and a deep royal maroon/gold aesthetic.
-- **Cinematic Experience**: Immersive parallax hero section with glowing Buddhist symbolism.
-- **Micro-Interactions**: Smooth 60fps animations using Framer Motion (entry fades, scale springs, and floating particle systems).
-- **Mobile First**: Meticulously tested for responsive viewing across all devices.
-- **Interactive Layers**: Contextual background audio and petal fall system.
+## Design Highlights
+- **Vibrant Madhubani Theme**: Deep Maroon, Mustard, Teal, and Indigo color palette.
+- **Architectural Borders**: Fixed Madhubani patterned left border that stays as you scroll.
+- **Parallax Flow**: Smooth scroll transitions with Framer Motion and custom CSS perspective.
+- **Typography Fusion**: Elegant Playfair Display mixed with handwritten Dancing Script and traditional Devanagari.
+- **Cultural Assets**: Hand-drawn SVG illustrations of fish, sun, and patterns.
 
-## Setup & Deployment:
-1. **Local Dev**: `npm install && npm run dev`
-2. **Build**: `npm run build`
-3. **Deployment**: Fully pre-configured for Vercel using `vercel.json` (Target: `dist` folder).
+## Pages
+1. **Premium Hero**: Dark Maroon background with Gold lettering (Buddhist theme).
+2. **Vibrant Story**: Cream background with Teal and Orange accents.
+3. **Heritage Cards**: Multi-colored family information cards.
+4. **The Happening**: Timeline with alternating parallax movements.
+5. **Sacred Footer**: Buddhist blessing request in Deep Indigo.
+
+## Setup
+- `npm install`
+- `npm run dev`
+- Build for deployment: `npm run build`
 
 ---
-No basic code. No 5th-grade design. Just luxury.
+Luxury meets Tradition.
