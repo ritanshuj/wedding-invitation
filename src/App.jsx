@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
-import { Heart, MapPin, Calendar, Clock, Volume2, VolumeX } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { Heart, Volume2, VolumeX } from 'lucide-react';
 import Hero from './components/Hero';
 import Sections from './components/Sections';
 
@@ -18,19 +18,18 @@ function App() {
   };
 
   return (
-    <div className="relative min-h-screen bg-[#FFFDF0] flex">
+    <div className="relative min-h-screen bg-[#FFFDF0]">
       <div className="madhubani-border-left" />
       <audio ref={audioRef} loop src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-8.mp3" />
       
-      {/* Audio Button */}
       <button 
         onClick={toggleMusic}
-        className="fixed bottom-6 right-6 z-[110] p-4 rounded-full bg-royal-maroon text-madhubani-mustard shadow-2xl border-2 border-madhubani-mustard"
+        className="fixed bottom-6 right-6 z-[110] p-4 rounded-full bg-royal-maroon text-madhubani-mustard shadow-2xl border-2 border-madhubani-mustard hover:scale-110 active:scale-95 transition-all"
       >
         {isPlaying ? <Volume2 size={24} /> : <VolumeX size={24} />}
       </button>
 
-      <div className="content-wrapper flex-1">
+      <div className="content-wrapper">
         <Hero />
         <Sections />
       </div>

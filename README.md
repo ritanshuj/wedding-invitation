@@ -1,19 +1,17 @@
-# Premium Madhubani Wedding Invitation
+# Final Fixed Vibrant Madhubani Wedding Invitation
 
-A high-end, vibrant digital wedding invitation for Ritanshu and Ria.
+Agency-grade digital invitation with high-end parallax and cultural Madhubani aesthetics.
 
-## Design Details:
-- **Royal Maroon Hero**: A cinematic start with dark tones and gold lettering.
-- **Madhubani Left Border**: A fixed architectural element that persists during the scroll.
-- **Multi-Vibrant Sections**: Using Mustard, Teal, Indigo, and Orange for a traditional yet modern look.
-- **Parallax Interactions**: Text and cards animate with depth as you scroll.
+## Critical Build Fix:
+- Corrected the Syntax Error in `src/components/Hero.jsx`: Fixed opening `<motion.h1>` tag to match its closing `</motion.h1>` tag (previously malformed as `</h1 >`).
 
-## Project Structure:
-- `Vite` for ultra-fast performance.
-- `Framer Motion` for high-end cinematic animations.
-- `Tailwind CSS` for artisanal styling.
+## Design Features:
+- **Royal Maroon Start**: Luxury dark intro with gold-gradient typography.
+- **Fixed Left Border**: A signature Madhubani sidebar that anchors the experience.
+- **Vibrant Parallax**: Color-blocked sections (Mustard, Teal, Indigo) that animate as you scroll.
+- **High-End Shadows**: Commercial-grade drop shadows and spacing.
 
 ## Deployment:
-The project is pre-configured for **Vercel**. Simply push to your repository.
-- Build Command: `npm run build`
-- Output Directory: `dist`
+Push this entire folder to your GitHub and connect to Vercel. 
+- Build: `npm run build`
+- Output: `dist`
