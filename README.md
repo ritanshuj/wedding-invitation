@@ -1,17 +1,14 @@
-# Final Fixed Vibrant Madhubani Wedding Invitation
+# Vibrant Madhubani Wedding Invitation Masterpiece
 
-Agency-grade digital invitation with high-end parallax and cultural Madhubani aesthetics.
+This version completely overhauls the design to be cheerfull, vibrant, and artistic while maintaining the premium Maroon/Gold roots.
 
-## Critical Build Fix:
-- Corrected the Syntax Error in `src/components/Hero.jsx`: Fixed opening `<motion.h1>` tag to match its closing `</motion.h1>` tag (previously malformed as `</h1 >`).
+## Changes:
+1. **Bilateral Parallax Borders**: Hand-painted Madhubani patterns on both left and right sides that move at different speeds as you scroll.
+2. **Handmade Texture**: Added a subtle paper texture over the entire site to give it a "physical invitation" feel.
+3. **Cheerfulness**: Replaced clean corporate layouts with colorful cards (Indian Yellow, Teal, Saffron) and hand-drawn SVG motifs (Fish, Sun, Mandalas).
+4. **Vibrant Typography**: Used multi-colored gradients and decorative fonts.
+5. **Mobile First**: All elements scale perfectly for mobile screens.
 
-## Design Features:
-- **Royal Maroon Start**: Luxury dark intro with gold-gradient typography.
-- **Fixed Left Border**: A signature Madhubani sidebar that anchors the experience.
-- **Vibrant Parallax**: Color-blocked sections (Mustard, Teal, Indigo) that animate as you scroll.
-- **High-End Shadows**: Commercial-grade drop shadows and spacing.
-
-## Deployment:
-Push this entire folder to your GitHub and connect to Vercel. 
-- Build: `npm run build`
-- Output: `dist`
+## Technical:
+- Build Fix: Ensured all React tags are closed and paths are absolute/clear for Vite.
+- Performance: Used Framer Motion `useTransform` for efficient parallax.

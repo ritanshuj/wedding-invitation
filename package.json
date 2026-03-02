@@ -1,6 +1,6 @@
 {
-  "name": "ritanshu-ria-wedding",
-  "version": "1.4.0",
+  "name": "ritanshu-ria-wedding-vibrant",
+  "version": "2.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite",

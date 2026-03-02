@@ -3,50 +3,51 @@ import { motion, useScroll, useTransform } from 'framer-motion';
 
 export default function Hero() {
   const { scrollY } = useScroll();
-  const y = useTransform(scrollY, [0, 500], [0, 150]);
+  const scale = useTransform(scrollY, [0, 500], [1, 0.8]);
+  const opacity = useTransform(scrollY, [0, 300], [1, 0]);
 
   return (
-    <section className="relative h-screen flex items-center justify-center overflow-hidden bg-royal-maroon">
-      <motion.div style={{ y }} className="relative z-10 text-center px-6">
-        <motion.div
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 1.5 }}
-          className="mb-10 text-center"
-        >
-          <p className="font-hindi text-4xl md:text-6xl luxury-gold-vibe tracking-[0.4em] mb-4">नमो बुद्धाय</p>
-          <div className="h-[2px] w-48 bg-madhubani-mustard/30 mx-auto" />
-        </motion.div>
+    <section className="relative h-screen bg-madhubani-maroon flex items-center justify-center overflow-hidden border-b-[12px] border-madhubani-gold">
+      {/* Floating Sun Motif */}
+      <motion.div 
+        animate={{ rotate: 360 }}
+        transition={{ duration: 30, repeat: Infinity, ease: 'linear' }}
+        className="absolute top-10 pointer-events-none opacity-20"
+      >
+        <svg width="600" height="600" viewBox="0 0 100 100">
+           <circle cx="50" cy="50" r="20" stroke="#FFD700" strokeWidth="0.5" fill="none" />
+           {Array.from({length: 24}).map((_, i) => (
+             <line key={i} x1="50" y1="20" x2="50" y2="10" stroke="#FFD700" strokeWidth="0.5" transform={`rotate(${i * 15} 50 50)`} />
+           ))}
+        </svg>
+      </motion.div>
 
+      <motion.div style={{ scale, opacity }} className="relative z-10 text-center px-4">
         <motion.div
-          initial={{ y: 30, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ delay: 1, duration: 1 }}
+          initial={{ opacity: 0, scale: 0.5 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 1 }}
         >
-          <motion.h1 
-            className="font-serif text-8xl md:text-[13rem] luxury-gold-vibe leading-none italic font-bold"
-          >
-            Ritanshu <br/>
-            <span className="text-4xl md:text-6xl text-madhubani-mustard/40 lowercase block my-8">&</span>
-            Ria
-          </motion.h1>
+          <span className="font-hindi text-4xl md:text-6xl text-madhubani-gold block mb-8 tracking-[0.3em] drop-shadow-[0_4px_4px_rgba(0,0,0,0.5)]">नमो बुद्धाय</span>
         </motion.div>
+        
+        <h1 className="font-serif text-[15vw] md:text-[12rem] gold-shimmer leading-none font-bold italic">
+          Ritanshu <br/>
+          <span className="text-4xl md:text-6xl text-madhubani-gold/50 block font-script my-4">and</span>
+          Ria
+        </h1>
 
         <motion.div 
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1.8 }}
-          className="mt-20 flex flex-col items-center"
+          initial={{ y: 50, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ delay: 0.5 }}
+          className="mt-12 flex flex-col items-center gap-4"
         >
-           <p className="font-sans text-xl md:text-2xl text-madhubani-mustard tracking-[0.5em] font-light italic">LUCKNOW • 08 MAY 2026</p>
+           <div className="h-px w-64 bg-madhubani-gold/40" />
+           <p className="font-serif text-xl md:text-3xl text-madhubani-gold tracking-[0.5em] font-light">LUCKNOW • 08 MAY 2026</p>
+           <div className="h-px w-64 bg-madhubani-gold/40" />
         </motion.div>
       </motion.div>
-      
-      <div className="absolute inset-0 opacity-10 pointer-events-none flex flex-wrap gap-20 p-20">
-         {Array.from({ length: 12 }).map((_, i) => (
-           <div key={i} className="w-24 h-24 border-2 border-madhubani-mustard rotate-45 shrink-0" />
-         ))}
-      </div>
     </section>
   );
 }
