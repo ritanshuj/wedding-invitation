@@ -44,6 +44,21 @@
     background: radial-gradient(circle at center, transparent 50%, rgba(163, 122, 44, 0.12) 100%);
   }
 
+  /* WELCOME OVERLAY (For Autoplay Audio) */
+  #welcome-overlay {
+    position: fixed; inset: 0; background: var(--card-bg); z-index: 100000;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    transition: opacity 1s ease, visibility 1s ease;
+  }
+  #welcome-overlay.hidden { opacity: 0; visibility: hidden; }
+  .welcome-btn {
+    padding: 15px 40px; background: var(--crimson); color: white; border: none;
+    text-transform: uppercase; letter-spacing: 3px; font-size: 1rem; border-radius: 30px;
+    cursor: pointer; box-shadow: 0 10px 20px rgba(158, 42, 43, 0.3); font-family: 'Montserrat', sans-serif;
+    animation: pulse-glow 2s infinite; transition: all 0.3s ease;
+  }
+  .welcome-btn:hover { background: var(--gold-dark); transform: translateY(-3px); }
+
   /* ── 2. COUNTDOWN TOPBAR ── */
   #countdown-bar {
     position: fixed; top: 0; left: 0; right: 0; height: 50px; z-index: 1000;
@@ -290,6 +305,12 @@
 <body>
 
   <div id="vignette"></div>
+
+  <div id="welcome-overlay">
+    <h2 style="font-family: 'Great Vibes', cursive; font-size: clamp(3.5rem, 8vw, 5rem); color: var(--crimson); margin-bottom: 10px;">Ritanshu & Ria</h2>
+    <p style="font-family: 'Montserrat', sans-serif; font-size: 0.8rem; letter-spacing: 3px; margin-bottom: 40px; color: var(--gold-dark);">INVITE YOU TO CELEBRATE</p>
+    <button id="open-invite-btn" class="welcome-btn">Open Invitation</button>
+  </div>
 
   <div id="map-modal" class="map-modal">
     <div class="map-modal-content">
@@ -584,11 +605,23 @@
         }
       });
 
-      // 6. AUDIO PLAYER LOGIC
+      // 6. AUDIO PLAYER & WELCOME OVERLAY LOGIC
       const music = document.getElementById("bg-music");
       const musicBtn = document.getElementById("music-toggle");
       const musicIcon = document.getElementById("music-icon");
+      const welcomeOverlay = document.getElementById("welcome-overlay");
+      const openBtn = document.getElementById("open-invite-btn");
       let isPlaying = false;
+
+      // When they click "Open Invitation", hide overlay and start music
+      openBtn.addEventListener("click", function() {
+        welcomeOverlay.classList.add("hidden");
+        music.play().then(() => {
+          isPlaying = true;
+          musicIcon.textContent = "🎵";
+          musicBtn.style.animation = "pulse-glow 2s infinite";
+        }).catch(error => console.log("Audio play blocked:", error));
+      });
 
       function toggleMusic() {
         if (isPlaying) {
@@ -607,17 +640,6 @@
         e.stopPropagation();
         toggleMusic();
       });
-
-      document.body.addEventListener("click", function startAudio(e) {
-        if (!isPlaying && e.target.id !== 'btn-google-map' && e.target.id !== 'btn-apple-map') {
-          music.play().then(() => {
-            isPlaying = true;
-            musicIcon.textContent = "🎵";
-            musicBtn.style.animation = "pulse-glow 2s infinite";
-          }).catch(error => console.log("Audio play blocked until interaction:", error));
-        }
-        document.body.removeEventListener("click", startAudio);
-      }, { once: true });
       
     });
 
