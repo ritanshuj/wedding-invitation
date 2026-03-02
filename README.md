@@ -1,15 +1,16 @@
-# Vibrant Madhubani Masterpiece (Fixed & Cheerful)
+# Official Clone of Laavan Invite (Ritanshu & Ria)
 
-This version resolves the Vercel build error and significantly boosts the **vibrance, cheerfulness, and energy** of the invitation.
+This version is the most accurate re-creation of the 'Missing Piece Invites' Single-Page Experience.
 
-## Key Fixes:
-1. **Resolved Quote Error**: Fixed the build error where the nested quotes in an inline SVG background were causing the esbuild to fail. Switched to CSS-based patterns and cleaner Tailwind classes.
-2. **Cheerfulness Overhaul**: Replaced the "subtle" palettes with high-energy colors: **Indian Yellow, Saffron Orange, Deep Madhubani Maroon, and Forest Teal**.
-3. **Typography High-Vibrance**: Headings are now bold, italics, and larger, creating a festive atmosphere.
-4. **Artistic Details**: Added custom hand-drawn SVG Fish and Sun motifs that actually look like Mithila art.
-5. **Bold Borders**: Added double-line gold and maroon borders that feel like high-end frames.
+## Key Enhancements:
+- **Direct Layout Clone**: Mimics the exact vertical flow of the original demo.
+- **Cinematic Hero**: Overlapping text and floral background for a premium feel.
+- **Responsive Item Grid**: Flexible event and information cards that stack gracefully on mobile.
+- **Premium Interactivity**: Hover states for the couple's portraits and countdown numbers.
+- **Performance**: Optimized for fast-loading on mobile networks (GZipped assets).
 
-## Deployment:
-Connect your repo to Vercel. 
-- Build Command: `npm run build`
-- Output: `dist`
+## Deployment Instructions:
+1. Connect this folder to a GitHub repository.
+2. Sign in to **Vercel**.
+3. Import the project. Vercel will auto-detect Vite.
+4. Deploy!

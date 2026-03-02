@@ -3,59 +3,25 @@
 @tailwind utilities;
 
 @layer base {
-  body { @apply antialiased; }
+  body { @apply font-body antialiased selection:bg-lv-gold selection:text-white; }
 }
 
-.handcrafted-overlay {
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
+.hero-name {
+  font-size: clamp(4rem, 15vw, 15rem);
+  line-height: 0.8;
+  letter-spacing: -0.05em;
+}
+
+.laavan-border-b {
+  border-bottom: 2px solid rgba(81, 4, 4, 0.05);
+}
+
+.scroll-reveal {
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+.floral-corner {
   opacity: 0.1;
-  background-image: url("https://www.transparenttextures.com/patterns/handmade-paper.png");
-  z-index: 1000;
-}
-
-.madhubani-parallex-border {
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  width: 80px;
-  z-index: 200;
-  background-image: url("data:image/svg+xml,%3Csvg width='80' height='200' viewBox='0 0 80 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%23580C1F' stroke-width='2'%3E%3Ccircle cx='40' cy='40' r='10'/%3E%3Cpath d='M20 70 Q 40 50 60 70 T 20 110 T 60 150' /%3E%3Ccircle cx='40' cy='180' r='12' fill='%23F9A825' fill-opacity='0.2'/%3E%3C/g%3E%3C/svg%3E");
-  background-repeat: repeat-y;
-  background-size: contain;
-}
-
-.madhubani-left { left: 0; border-right: 4px double #580C1F; }
-.madhubani-right { right: 0; border-left: 4px double #580C1F; }
-
-@media (max-width: 1024px) {
-  .madhubani-parallex-border { width: 40px; }
-  .canvas-container { padding: 0 40px; }
-}
-
-@media (min-width: 1025px) {
-  .canvas-container { padding: 0 80px; }
-}
-
-.glow-title {
-  background: linear-gradient(90deg, #FFD700, #F9A825, #FFD700);
-  background-size: 200% auto;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  animation: shine 3s linear infinite;
-}
-
-@keyframes shine {
-  to { background-position: 200% center; }
-}
-
-.vibrant-shimmer-card {
-  box-shadow: 15px 15px 0px rgba(88, 12, 31, 1);
-  border: 4px solid #580C1F;
-}
-
-.dotted-pattern {
-  background-image: radial-gradient(#580C1F 1px, transparent 1px);
-  background-size: 20px 20px;
+  pointer-events: none;
 }
