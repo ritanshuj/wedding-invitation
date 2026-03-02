@@ -1,17 +1,636 @@
 <!DOCTYPE html>
-<html lang="hi">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
-    <title>Wedding of Ritanshu & Ria</title>
-    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Noto+Sans+Devanagari:wght@400;700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
-    <style>
-      body { margin: 0; background-color: #FFFDF8; color: #510404; overflow-x: hidden; scroll-behavior: smooth; }
-      ::-webkit-scrollbar { width: 0; }
-    </style>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
-  </body>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Wedding of Ritanshu & Ria</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,400&family=Montserrat:wght@300;400;500;600;700&family=Great+Vibes&family=Noto+Serif+Devanagari:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --text-main: #3E3B35;
+    --text-light: #5A554C;
+    --gold: #D4AF37;
+    --gold-light: #F4E0A1;
+    --gold-dark: #A37A2C;
+    --crimson: #9E2A2B;
+    --card-bg: rgba(255, 252, 248, 0.92);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html, body {
+    overflow-x: hidden;
+    width: 100%;
+  }
+
+  body {
+    color: var(--text-main);
+    font-family: 'Montserrat', sans-serif;
+    line-height: 1.6;
+    background-color: #FDFBF7;
+  }
+
+  /* ── 1. ENHANCED PREMIUM PAPER TEXTURE & VIGNETTE ── */
+  body::after {
+    content: ''; position: fixed; inset: 0; z-index: 9998; pointer-events: none;
+    background-image: url("data:image/svg+xml,%3Csvg width='200' height='200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='paperNoise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.04' numOctaves='5' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23paperNoise)' opacity='0.15'/%3E%3C/svg%3E");
+    mix-blend-mode: multiply;
+  }
+  
+  #vignette {
+    position: fixed; inset: 0; z-index: 9997; pointer-events: none;
+    background: radial-gradient(circle at center, transparent 50%, rgba(163, 122, 44, 0.12) 100%);
+  }
+
+  /* ── 2. COUNTDOWN TOPBAR ── */
+  #countdown-bar {
+    position: fixed; top: 0; left: 0; right: 0; height: 50px; z-index: 1000;
+    background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(10px);
+    border-bottom: 2px solid rgba(212, 175, 55, 0.3);
+    display: flex; justify-content: center; align-items: center; gap: 15px;
+    font-family: 'Cormorant Garamond', serif; color: var(--gold-dark); font-weight: 600;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+  }
+  .cd-item { display: flex; align-items: baseline; gap: 4px; }
+  .cd-num { font-size: 1.3rem; color: var(--crimson); }
+  .cd-label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 2px; color: var(--text-light); font-family: 'Montserrat', sans-serif;}
+
+  /* ── 3. FIXED BACKGROUND THEME COLORS ── */
+  .bg-layer {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100vh; z-index: -2;
+    opacity: 0; transition: opacity 1.5s ease-in-out;
+  }
+  .bg-layer.active { opacity: 1; }
+
+  #bg-default { background: linear-gradient(135deg, #FFF9ED, #F4EAE6); }
+  #bg-haldi { background: linear-gradient(135deg, #FFF4E0, #FFD194, #FFB75E); }
+  #bg-mehendi { background: linear-gradient(135deg, #2A1B38, #E76F51, #F4A261); }
+  #bg-baraat { background: linear-gradient(135deg, #0B131E, #1A2F40, #2C5364); }
+
+  /* ── 4. DYNAMIC PARALLAX DECORATORS ── */
+  .haldi-sun {
+    position: absolute; top: -10%; left: -5%; width: 50vw; height: 50vw;
+    background: radial-gradient(circle, rgba(255,255,255,0.6) 0%, rgba(255,215,0,0.3) 30%, transparent 70%);
+    animation: pulse-sun 6s infinite alternate ease-in-out; z-index: -1;
+  }
+  @keyframes pulse-sun { 0% { transform: scale(1); opacity: 0.6; } 100% { transform: scale(1.2); opacity: 1; } }
+  
+  .haldi-dust { position: absolute; width: 20px; height: 20px; background: rgba(255, 255, 255, 0.5); border-radius: 50%; filter: blur(4px); animation: floatUp 8s infinite linear; z-index: -1;}
+  .hd-1 { left: 20%; animation-duration: 10s; bottom: -20vh; } 
+  .hd-2 { left: 60%; animation-duration: 14s; animation-delay: 3s; bottom: -30vh; }
+  @keyframes floatUp { 0% { transform: translateY(50vh) scale(0.5); opacity: 0; } 50% { opacity: 1; } 100% { transform: translateY(-50vh) scale(1.5); opacity: 0; } }
+
+  /* Perfected Marigold Garlands */
+  .marigold-garlands {
+    position: absolute; top: 0; left: 0; width: 100%; height: 110px; z-index: -1;
+  }
+  .mg-horizontal {
+    width: 100%; height: 100%;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 60' preserveAspectRatio='none'%3E%3Cpath d='M0,10 Q100,50 200,10 Q300,50 400,10' fill='none' stroke='%23228850' stroke-width='2' opacity='0.6'/%3E%3Cpath d='M0,10 Q100,50 200,10 Q300,50 400,10' fill='none' stroke='%23D84020' stroke-width='14' stroke-dasharray='8 4' opacity='0.85'/%3E%3Cpath d='M0,10 Q100,50 200,10 Q300,50 400,10' fill='none' stroke='%23F5920A' stroke-width='9' stroke-dasharray='6 6'/%3E%3Cpath d='M0,10 Q100,50 200,10 Q300,50 400,10' fill='none' stroke='%23FAD080' stroke-width='4' stroke-dasharray='2 10'/%3E%3C/svg%3E");
+    background-size: 100% 100%; filter: drop-shadow(0px 8px 6px rgba(0,0,0,0.15));
+  }
+  
+  @keyframes sway {
+    0% { transform: rotate(-4deg); }
+    100% { transform: rotate(4deg); }
+  }
+
+  .marigold-drop {
+    position: absolute; top: 12px; width: 14px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 100' preserveAspectRatio='none'%3E%3Cpath d='M10,0 L10,100' fill='none' stroke='%23228850' stroke-width='2' opacity='0.6'/%3E%3Cpath d='M10,0 L10,100' fill='none' stroke='%23D84020' stroke-width='14' stroke-dasharray='8 4' opacity='0.85'/%3E%3Cpath d='M10,0 L10,100' fill='none' stroke='%23F5920A' stroke-width='9' stroke-dasharray='6 6'/%3E%3Cpath d='M10,0 L10,100' fill='none' stroke='%23FAD080' stroke-width='4' stroke-dasharray='2 10'/%3E%3C/svg%3E");
+    background-repeat: repeat-y; background-size: 100% auto; filter: drop-shadow(0px 4px 4px rgba(0,0,0,0.15));
+    transform-origin: top center; 
+  }
+  .md-left { left: 0%; height: 320px; animation: sway 3.5s ease-in-out infinite alternate; } 
+  .md-right { right: 0%; left: auto; height: 320px; animation: sway 4s ease-in-out infinite alternate-reverse; }
+
+  .spotlight { position: absolute; border-radius: 50%; filter: blur(60px); opacity: 0.4; animation: sweep 12s infinite ease-in-out alternate; z-index: -1; }
+  .sl-1 { width: 300px; height: 300px; background: #D4AF37; top: 20%; left: -10%; }
+  .sl-2 { width: 400px; height: 400px; background: #9E2A2B; bottom: 20%; right: -10%; animation-direction: alternate-reverse; }
+  @keyframes sweep { 0% { transform: translate(0, 0); } 100% { transform: translate(15vw, 15vh); } }
+
+  .fw {
+    position: absolute; width: 6px; height: 6px; border-radius: 50%;
+    animation: explode 2.5s infinite ease-out; z-index: 0; opacity: 0;
+  }
+  .fw-1 { top: 25%; left: 20%; animation-delay: 0s; color: #FAD080; }
+  .fw-2 { top: 15%; left: 80%; animation-delay: 0.8s; color: #F090B0; }
+  .fw-3 { top: 65%; left: 85%; animation-delay: 1.5s; color: #F5920A; }
+  .fw-4 { top: 70%; left: 15%; animation-delay: 1.2s; color: #C0A0FF; }
+  .fw-5 { top: 10%; left: 50%; animation-delay: 2.1s; color: #D4AF37; }
+
+  @keyframes explode {
+    0% { box-shadow: 0 0 0 0px currentColor; opacity: 1; transform: scale(0.5); }
+    100% {
+      box-shadow:
+        -60px -60px 0 -2px currentColor, 60px -60px 0 -2px currentColor,
+        -60px 60px 0 -2px currentColor, 60px 60px 0 -2px currentColor,
+        0 -85px 0 -2px currentColor, 0 85px 0 -2px currentColor,
+        -85px 0 0 -2px currentColor, 85px 0 0 -2px currentColor,
+        -45px -80px 0 -2px currentColor, 45px -80px 0 -2px currentColor,
+        -45px 80px 0 -2px currentColor, 45px 80px 0 -2px currentColor,
+        -80px -45px 0 -2px currentColor, 80px -45px 0 -2px currentColor,
+        -80px 45px 0 -2px currentColor, 80px 45px 0 -2px currentColor;
+      opacity: 0; transform: scale(1.5);
+    }
+  }
+
+  /* ── 5. MASKED VIDEOS & DEVANAGARI TEXT ── */
+  .devanagari-title {
+    font-family: 'Noto Serif Devanagari', serif; font-size: 1.6rem; color: var(--crimson);
+    font-weight: 600; margin-bottom: 25px; text-shadow: 1px 1px 3px rgba(255,255,255,0.6); z-index: 2;
+  }
+
+  .buddha-video-container { 
+    position: relative; width: 120px; aspect-ratio: 1 / 1; margin: 0 auto 5px; z-index: 1;
+    mask-image: radial-gradient(circle at center, black 40%, transparent 68%);
+    -webkit-mask-image: radial-gradient(circle at center, black 40%, transparent 68%);
+  }
+  .buddha-video { width: 100%; height: 100%; object-fit: cover; mix-blend-mode: multiply; transform: scale(1.05); }
+
+  /* TRUE EDGE-TO-EDGE BARAAT VIDEO */
+  .edge-video-wrapper {
+    position: relative;
+    width: calc(100% + 40px);
+    margin-left: -20px;
+    margin-right: -20px;
+    height: 50vh;
+    min-height: 350px;
+    display: flex; justify-content: center;
+    mask-image: linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%);
+  }
+  .edge-video-wrapper video {
+    width: 100%; height: 100%; object-fit: cover;
+    mix-blend-mode: multiply; filter: contrast(1.1);
+  }
+
+  /* ── TYPOGRAPHY & LAYOUT ── */
+  h1, h2, h3, .serif { font-family: 'Cormorant Garamond', serif; }
+  .script { font-family: 'Great Vibes', cursive; font-size: 3rem; color: var(--crimson); text-shadow: 1px 1px 2px rgba(255,255,255,0.5); }
+  
+  section { padding: 140px 20px 80px; min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; position: relative; z-index: 10; }
+
+  /* MAP & CONTACT BUTTON STYLING */
+  .map-btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: 6px; margin-top: 15px; padding: 8px 16px;
+    background: rgba(212, 175, 55, 0.15); border: 1px solid rgba(212, 175, 55, 0.4); border-radius: 25px;
+    font-family: 'Montserrat', sans-serif; font-size: 0.75rem; font-weight: 500; color: var(--gold-dark);
+    text-transform: uppercase; cursor: pointer; letter-spacing: 1px; text-decoration: none; transition: all 0.3s ease; position: relative; z-index: 10;
+  }
+  .map-btn:hover { background: var(--gold-dark); color: white; transform: translateY(-2px); }
+
+  /* High priority floating buttons */
+  .contact-btn, .music-btn {
+    position: fixed; width: 60px; height: 60px; border-radius: 50%;
+    background: var(--gold); border: 2px solid white; color: white; font-size: 1.5rem; display: flex; align-items: center; justify-content: center;
+    cursor: pointer; box-shadow: 0 4px 15px rgba(0,0,0,0.3); z-index: 9999; transition: all 0.3s ease;
+  }
+  .contact-btn { bottom: 30px; left: 30px; }
+  .music-btn { bottom: 30px; right: 30px; animation: pulse-glow 2s infinite; }
+  
+  .contact-btn:hover, .music-btn:hover { transform: scale(1.1); background: var(--gold-dark); animation: none; }
+  @keyframes pulse-glow { 0% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.7); } 70% { box-shadow: 0 0 0 15px rgba(212, 175, 55, 0); } 100% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0); } }
+
+  .contact-menu {
+    position: fixed; bottom: 100px; left: 30px; background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px);
+    border: 2px solid var(--gold); border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+    display: flex; flex-direction: column; z-index: 9999; opacity: 0; pointer-events: none;
+    transform: translateY(10px); transition: all 0.3s ease; width: 260px; overflow: hidden; text-align: left;
+  }
+  .contact-menu.show { opacity: 1; pointer-events: all; transform: translateY(0); }
+  .contact-side { padding: 10px 0; }
+  .contact-side:not(:last-child) { border-bottom: 1px solid rgba(212, 175, 55, 0.3); }
+  .contact-side h4 {
+    font-family: 'Cinzel', serif; font-size: 0.75rem; color: var(--gold-dark);
+    text-transform: uppercase; letter-spacing: 2px; padding: 5px 20px; margin: 0; background: rgba(212, 175, 55, 0.1);
+  }
+  .contact-menu a {
+    padding: 10px 20px; text-decoration: none; color: var(--text-main); font-family: 'Montserrat', sans-serif;
+    font-size: 0.85rem; display: block; transition: background 0.2s; font-weight: 500;
+  }
+  .contact-menu a span { font-weight: 300; display: block; font-size: 0.75rem; color: var(--text-light); margin-top: 2px;}
+  .contact-menu a:hover { background: rgba(212, 175, 55, 0.1); color: var(--crimson); }
+
+  /* UNIVERSAL MAP MODAL */
+  .map-modal {
+    position: fixed; inset: 0; background: rgba(0,0,0,0.6); z-index: 10000; display: flex; align-items: center; justify-content: center;
+    opacity: 0; pointer-events: none; transition: opacity 0.3s ease; backdrop-filter: blur(5px);
+  }
+  .map-modal.show { opacity: 1; pointer-events: all; }
+  .map-modal-content {
+    background: var(--card-bg); padding: 40px; border-radius: 15px; text-align: center; border: 2px solid var(--gold);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.2); transform: translateY(20px); transition: transform 0.3s ease; width: 90%; max-width: 350px;
+  }
+  .map-modal.show .map-modal-content { transform: translateY(0); }
+
+  /* ── 6. 3D VINTAGE GOLD & GOTHIC ARCH EVENT CARDS ── */
+  .event-card {
+    position: relative; background: var(--card-bg); margin: 30px auto; max-width: 600px; width: 100%;
+    backdrop-filter: blur(12px); border: 12px solid #D4AF37; border-image: linear-gradient(135deg, #B8860B, #FFF8DC, #DAA520, #8A5A19, #FFD700, #B8860B) 12;
+    box-shadow: 0 25px 45px rgba(0,0,0,0.25), inset 0 0 25px rgba(0,0,0,0.4), inset 0 0 0 4px rgba(255,255,255,0.9), inset 0 0 0 6px #B8860B;
+    transform-style: preserve-3d; perspective: 1000px; animation: float-3d 6s ease-in-out infinite; transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.6s ease;
+  }
+  .event-card:hover {
+    animation-play-state: paused; transform: translateY(-15px) scale(1.02) rotateX(4deg) rotateY(-1deg);
+    box-shadow: -10px 40px 60px rgba(0,0,0,0.35), inset 0 0 30px rgba(0,0,0,0.3), inset 0 0 0 4px rgba(255,255,255,1), inset 0 0 0 6px #B8860B;
+  }
+  @keyframes float-3d { 0%, 100% { transform: translateY(0) rotateX(0deg) rotateY(0deg); } 50% { transform: translateY(-10px) rotateX(3deg) rotateY(1deg); } }
+
+  .event-card-inner {
+    padding: 50px 30px 40px; border: 2px solid rgba(212, 175, 55, 0.6); border-top-left-radius: 60px; border-top-right-radius: 60px;
+    position: relative; margin: 15px; background: rgba(255, 255, 255, 0.4); overflow: hidden;
+  }
+  .event-card-inner.dark-mode { background: rgba(15, 25, 35, 0.95); border-color: rgba(212, 175, 55, 0.4); }
+  .event-card-inner.dark-mode .event-title { color: var(--gold-light); }
+  .event-card-inner.dark-mode .event-time { color: var(--gold); }
+  .event-card-inner.dark-mode .event-details { color: rgba(255,255,255,0.85); }
+  .event-card-inner.dark-mode .event-details strong { color: #fff; }
+  .event-card-inner.dark-mode .map-btn { border-color: rgba(212,175,55,0.6); color: var(--gold-light); }
+  .event-card-inner.dark-mode .map-btn:hover { background: var(--gold); color: #fff; }
+  .event-card-inner::before {
+    content: '❖'; position: absolute; top: -14px; left: 50%; transform: translateX(-50%);
+    color: var(--gold-dark); background: #FDFBF7; padding: 0 15px; font-size: 1.5rem; z-index: 3;
+  }
+  .event-card-inner.dark-mode::before { background: #0f1923; color: var(--gold); }
+
+  .event-title { font-size: 2.8rem; color: var(--crimson); margin-bottom: 10px; font-weight: 600; text-shadow: 1px 1px 2px rgba(0,0,0,0.05); }
+  .event-time { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 3px; color: var(--gold-dark); margin-bottom: 20px; font-weight: 600; }
+  .event-details { font-size: 1.1rem; color: var(--text-main); }
+  .names { font-size: clamp(3.5rem, 10vw, 5.5rem); font-weight: 600; line-height: 1; margin: 10px 0; color: var(--crimson); }
+
+  /* Date Layout Matched to Reference Image */
+  .new-date-layout {
+    display: flex; align-items: center; justify-content: center;
+    gap: clamp(12px, 4vw, 30px); margin-top: 30px; color: var(--ink);
+  }
+  .nd-col { display: flex; flex-direction: column; align-items: center; gap: 6px; }
+  .nd-top { font-family: 'Cormorant Garamond', serif; font-size: clamp(13px, 2.5vw, 18px); letter-spacing: 4px; text-transform: uppercase; font-weight: 600; }
+  .nd-bot { font-family: 'Cormorant Garamond', serif; font-size: clamp(12px, 2vw, 15px); letter-spacing: 2px; color: var(--text-light); }
+  .nd-center { display: flex; align-items: center; gap: clamp(12px, 4vw, 30px); }
+  .nd-line { width: 1.5px; height: 50px; background-color: var(--gold); opacity: 0.7; }
+  .nd-day { font-family: 'Cormorant Garamond', serif; font-size: clamp(48px, 8vw, 68px); color: var(--crimson); line-height: 1; }
+
+  /* ── ANIMATIONS ── */
+  .reveal { opacity: 0; transform: translateY(40px); transition: all 1s cubic-bezier(0.5, 0, 0, 1); }
+  .reveal.active { opacity: 1; transform: translateY(0); }
+
+  /* ── BUTTONS ── */
+  .btn {
+    display: inline-block; margin-top: 40px; padding: 15px 40px; background: var(--crimson); color: white;
+    text-transform: uppercase; letter-spacing: 3px; font-size: 0.85rem; text-decoration: none; border-radius: 30px;
+    transition: all 0.3s ease; box-shadow: 0 10px 20px rgba(158, 42, 43, 0.3); font-weight: 600;
+  }
+  .btn:hover { background: var(--gold-dark); transform: translateY(-3px); box-shadow: 0 15px 25px rgba(163, 122, 44, 0.4); }
+
+</style>
+</head>
+<body>
+
+  <div id="vignette"></div>
+
+  <div id="map-modal" class="map-modal">
+    <div class="map-modal-content">
+       <h3 style="font-family: 'Cormorant Garamond', serif; color: var(--crimson); font-size: 1.8rem; margin-bottom: 15px; font-weight: 600;">Choose Map App</h3>
+       <p style="font-size: 0.9rem; color: var(--text-light); margin-bottom: 20px;">How would you like to navigate to the venue?</p>
+       <a id="btn-google-map" href="#" target="_blank" class="btn" style="display: block; margin-top: 10px; width: 100%; box-sizing: border-box;">Google Maps</a>
+       <a id="btn-apple-map" href="#" target="_blank" class="btn" style="display: block; margin-top: 15px; background: var(--gold-dark); width: 100%; box-sizing: border-box;">Apple Maps</a>
+       <button onclick="closeMapModal()" style="margin-top: 25px; background: none; border: none; color: var(--text-light); font-size: 0.9rem; text-decoration: underline; cursor: pointer; font-family: 'Montserrat', sans-serif;">Cancel</button>
+    </div>
+  </div>
+
+  <div id="contact-menu" class="contact-menu">
+    <div class="contact-side">
+      <h4>Groom's Side</h4>
+      <a href="tel:+919876543210">Shri. Ranjul Jayant Gautam <span>📞 +91 98765 43210</span></a>
+    </div>
+    <div class="contact-side" style="border-bottom: none;">
+      <h4>Bride's Side</h4>
+      <a href="tel:+918765432109">Shri. OmPrakash Keshari <span>📞 +91 87654 32109</span></a>
+    </div>
+  </div>
+  <button id="contact-btn" class="contact-btn" aria-label="Contact Us">📞</button>
+
+  <audio id="bg-music" loop>
+    <source src="wedding_invitation_song.mp3" type="audio/mpeg">
+  </audio>
+  <button id="music-toggle" class="music-btn" aria-label="Toggle Music"><span id="music-icon">🎵</span></button>
+
+  <div id="countdown-bar">
+    <div class="cd-item"><span class="cd-num" id="cd-days">00</span><span class="cd-label">Days</span></div> :
+    <div class="cd-item"><span class="cd-num" id="cd-hours">00</span><span class="cd-label">Hrs</span></div> :
+    <div class="cd-item"><span class="cd-num" id="cd-mins">00</span><span class="cd-label">Min</span></div> :
+    <div class="cd-item"><span class="cd-num" id="cd-secs">00</span><span class="cd-label">Sec</span></div>
+  </div>
+
+  <div id="bg-default" class="bg-layer active"></div>
+  <div id="bg-haldi" class="bg-layer"></div>
+  <div id="bg-mehendi" class="bg-layer"></div>
+  
+  <div id="bg-baraat" class="bg-layer">
+    <div class="fw fw-1"></div>
+    <div class="fw fw-2"></div>
+    <div class="fw fw-3"></div>
+    <div class="fw fw-4"></div>
+    <div class="fw fw-5"></div>
+  </div>
+
+  <section id="hero" data-bg="default" style="padding-top: 100px;">
+    <div class="marigold-garlands parallax-el" data-speed="0.15">
+      <div class="mg-horizontal"></div>
+      <div class="marigold-drop md-left"></div>
+      <div class="marigold-drop md-right"></div>
+    </div>
+
+    <div class="reveal" style="display: flex; flex-direction: column; align-items: center; justify-content: center; width: 100%; margin-top: 20px;">
+      <div class="buddha-video-container">
+        <video src="okay-do-that.mp4" autoplay loop muted playsinline class="buddha-video"></video>
+      </div>
+      <h2 class="devanagari-title">नमो बुद्धाय</h2>
+
+      <div class="script" style="margin-top: 20px;">Celebrating the union of</div>
+      <h1 class="names">Ritanshu<br><span style="font-size: 3.5rem; color: var(--gold); font-style: italic;">&</span><br>Ria</h1>
+      
+      <div class="new-date-layout">
+        <div class="nd-col">
+          <span class="nd-top">FRIDAY</span>
+          <span class="nd-bot">05.00 PM</span>
+        </div>
+        <div class="nd-center">
+          <div class="nd-line"></div>
+          <div class="nd-day">08</div>
+          <div class="nd-line"></div>
+        </div>
+        <div class="nd-col">
+          <span class="nd-top">MAY</span>
+          <span class="nd-bot">2026</span>
+        </div>
+      </div>
+      <p style="margin-top:15px; font-family:'Cinzel',serif; font-size:clamp(9px,1.4vw,12px); letter-spacing:3px; color:var(--text-light); text-transform:uppercase;">CITY CLUB · LUCKNOW, UP</p>
+      
+    </div>
+  </section>
+
+  <section id="blessings" data-bg="default" style="min-height: 60vh;">
+    <div class="reveal" style="max-width: 800px; padding: 40px 20px; text-align: center; position: relative; z-index: 10;">
+      
+      <h2 style="font-family:'Noto Serif Devanagari', serif; font-size: 2.2rem; color: var(--crimson); margin-bottom: 15px; font-weight: 600;">बुद्धं शरणं गच्छामि</h2>
+      
+      <p style="font-size: 1.25rem; font-weight: 300; color: var(--text-main); font-style: italic;">
+        "Radiate boundless love towards the entire world — above, below, and across — unhindered, without ill will, without enmity."<br>
+        <span style="font-size: 0.9rem; font-style: normal; color: var(--gold-dark); display: block; margin-top: 15px; text-transform: uppercase; letter-spacing: 2px;">— The Metta Sutta</span>
+      </p>
+
+      <div style="margin-top: 50px; padding-top: 40px; border-top: 1px dashed rgba(212, 175, 55, 0.4);">
+        <h3 style="font-family:'Playfair Display', serif; font-size: 2rem; color: var(--crimson); font-style: italic; margin-bottom: 15px;">You are Cordially Invited</h3>
+        <p style="font-size: 1.15rem; color: var(--text-main); line-height: 1.8; margin-bottom: 40px; max-width: 650px; margin-left: auto; margin-right: auto;">
+          We joyfully invite you and your family to share in our happiness as we embark on a new journey together. Your presence, love, and blessings will make our celebrations truly complete.
+        </p>
+      </div>
+
+      <div>
+        <p style="font-family:'Cinzel', serif; font-size: 0.85rem; color: var(--gold-dark); text-transform: uppercase; letter-spacing: 3px;">With the blessings of</p>
+        <div style="display: flex; justify-content: center; gap: clamp(20px, 5vw, 60px); margin-top: 20px; flex-wrap: wrap;">
+           <div>
+              <p style="font-family:'Cormorant Garamond', serif; font-size: 1.4rem; color: var(--text-main); font-weight: 600; line-height: 1.4;">Smt. Dharmpriya Gautam<br><span style="font-style: italic; color: var(--gold-dark); font-size: 1.1rem;">&</span> Shri. Ranjul Jayant Gautam</p>
+              <p style="font-size: 0.75rem; color: var(--text-light); text-transform: uppercase; letter-spacing: 1px; margin-top: 8px; font-weight: 600;">(Parents of the Groom)</p>
+           </div>
+           <div>
+              <p style="font-family:'Cormorant Garamond', serif; font-size: 1.4rem; color: var(--text-main); font-weight: 600; line-height: 1.4;">Smt. Usha Keshari<br><span style="font-style: italic; color: var(--gold-dark); font-size: 1.1rem;">&</span> Shri. OmPrakash Keshari</p>
+              <p style="font-size: 0.75rem; color: var(--text-light); text-transform: uppercase; letter-spacing: 1px; margin-top: 8px; font-weight: 600;">(Parents of the Bride)</p>
+           </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="haldi" data-bg="haldi">
+    <div class="marigold-garlands parallax-el" data-speed="0.15">
+      <div class="mg-horizontal"></div>
+      <div class="marigold-drop md-left"></div>
+      <div class="marigold-drop md-right"></div>
+    </div>
+    
+    <div class="haldi-sun parallax-el" data-speed="0.2"></div>
+    <div class="haldi-dust hd-1 parallax-el" data-speed="0.4"></div>
+    <div class="haldi-dust hd-2 parallax-el" data-speed="0.6"></div>
+
+    <div class="reveal" style="margin-bottom: -20px; margin-top: 60px;">
+      <h2 class="script" style="font-size: 3.5rem;">An Auspicious Beginning</h2>
+    </div>
+    <div class="event-card reveal">
+      <div class="event-card-inner">
+        <h3 class="event-title serif">Haldi Ceremony</h3>
+        <p class="event-time">06 MAY 2026 · 5:00 PM</p>
+        <p class="event-details">
+          <strong>Our residence</strong><br><br>
+          Join us under the morning sun to bless the bride and groom with golden turmeric. A morning of bright colors, joy, and laughter.<br><br>
+        </p>
+        <button onclick="openMapModal('Our residence', 'https://maps.app.goo.gl/yRGLnpj2GTTnx23B9')" class="map-btn">📍 Locate on Map</button>
+      </div>
+    </div>
+  </section>
+
+  <section id="mehendi" data-bg="mehendi">
+    <div class="marigold-garlands parallax-el" data-speed="0.15">
+      <div class="mg-horizontal"></div>
+      <div class="marigold-drop md-left"></div>
+      <div class="marigold-drop md-right"></div>
+    </div>
+
+    <div class="reveal" style="margin-bottom: -20px; margin-top: 60px;">
+      <h2 class="script" style="font-size: 3.5rem; color: var(--card-bg);">An Evening of Art</h2>
+    </div>
+    <div class="event-card reveal">
+      <div class="event-card-inner">
+        <h3 class="event-title serif">Mehendi & Sangeet</h3>
+        <p class="event-time">06 MAY 2026 · 7:00 PM</p>
+        <p class="event-details">
+          <strong>Our residence</strong><br><br>
+          As the sun sets, join us for an evening of intricate henna designs, vibrant folk music, and joyous dancing beneath the twilight sky.<br><br>
+        </p>
+        <button onclick="openMapModal('Our residence', 'https://maps.app.goo.gl/yRGLnpj2GTTnx23B9')" class="map-btn">📍 Locate on Map</button>
+      </div>
+    </div>
+  </section>
+
+  <section id="baraat" data-bg="baraat" style="padding-top: 80px;">
+    <div class="spotlight sl-1 parallax-el" data-speed="-0.1"></div>
+    <div class="spotlight sl-2 parallax-el" data-speed="0.1"></div>
+    
+    <div class="reveal" style="width: 100%; text-align: center; margin-bottom: -15px; position: relative; z-index: 4;">
+       <h2 class="script" style="font-size: clamp(3rem, 8vw, 4.5rem); color: var(--crimson); text-shadow: 2px 2px 4px rgba(255,255,255,0.9), -1px -1px 0px rgba(255,255,255,1), 0 0 15px rgba(255,255,255,0.8);">The Grand Celebration</h2>
+    </div>
+
+    <div class="reveal parallax-el edge-video-wrapper" data-speed="0.05" style="z-index: 2;">
+      <div style="position: absolute; inset: 0; background: rgba(255, 255, 255, 0.95); z-index: 0; pointer-events: none;"></div>
+      <video src="it-is-a-baraat-image-give-movement-to-everyone-in-.mp4" autoplay loop muted playsinline></video>
+    </div>
+
+    <div class="event-card reveal" style="z-index: 5; margin-top: -40px;">
+      <div class="event-card-inner dark-mode">
+        
+        <div class="fw fw-1"></div>
+        <div class="fw fw-2"></div>
+        <div class="fw fw-3"></div>
+        <div class="fw fw-4"></div>
+        <div class="fw fw-5"></div>
+
+        <div style="position: relative; z-index: 2;">
+          <h3 class="event-title serif">Wedding & Reception</h3>
+          <p class="event-time">08 MAY 2026 · 5:00 PM</p>
+          <p class="event-details">
+            <strong>City club, kursi road, Lucknow, UP</strong><br><br>
+            The evening begins with the joyful Baraat, followed by a serene wedding ceremony. Afterwards, celebrate the newlyweds with a grand dinner, toasts, and dancing under the stars.<br><br>
+          </p>
+          <button onclick="openMapModal('City club, kursi road, Lucknow', 'google.com/maps/place/City+Club,+Lucknow/data=!4m2!3m1!1s0x0:0x73ae2ec765787710?sa=X&ved=1t:2428&hl=en&ictx=111')" class="map-btn">📍 Locate on Map</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="rsvp" data-bg="default" style="min-height: 30vh; padding-top: 20px; padding-bottom: 40px;">
+    <div class="reveal" style="text-align: center; padding: 20px;">
+      <h2 class="script" style="font-size: 4rem; color: var(--gold-dark);">Kindly Reply</h2>
+      
+      <a href="https://docs.google.com/forms/d/e/1FAIpQLSfSLz_HSQ34jJdqWOWUKx2DBI4mZ_-acpguZ-0UL7wFvvizHA/viewform?usp=publish-editor" target="_blank" class="btn">Confirm Attendance</a>
+      
+    </div>
+  </section>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      
+      // 1. COUNTDOWN TIMER
+      const weddingDate = new Date("May 08, 2026 17:00:00").getTime();
+      const dayEl = document.getElementById("cd-days");
+      const hrEl = document.getElementById("cd-hours");
+      const minEl = document.getElementById("cd-mins");
+      const secEl = document.getElementById("cd-secs");
+
+      setInterval(function() {
+        const now = new Date().getTime();
+        const distance = weddingDate - now;
+
+        if (distance < 0) {
+          dayEl.innerText = "00"; hrEl.innerText = "00"; minEl.innerText = "00"; secEl.innerText = "00";
+          return;
+        }
+        dayEl.innerText = String(Math.floor(distance / (1000 * 60 * 60 * 24))).padStart(2, '0');
+        hrEl.innerText = String(Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))).padStart(2, '0');
+        minEl.innerText = String(Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60))).padStart(2, '0');
+        secEl.innerText = String(Math.floor((distance % (1000 * 60)) / 1000)).padStart(2, '0');
+      }, 1000);
+
+      // 2. SCROLL REVEAL FOR TEXT CARDS
+      const reveals = document.querySelectorAll(".reveal");
+      const revealOnScroll = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("active");
+            observer.unobserve(entry.target); 
+          }
+        });
+      }, { threshold: 0.15, rootMargin: "0px 0px -50px 0px" });
+      reveals.forEach(reveal => { revealOnScroll.observe(reveal); });
+
+      // 3. BACKGROUND THEME OBSERVER
+      const sections = document.querySelectorAll("section[data-bg]");
+      const bgLayers = document.querySelectorAll(".bg-layer");
+
+      const themeObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const activeBg = entry.target.getAttribute("data-bg");
+            bgLayers.forEach(layer => layer.classList.remove("active"));
+            const targetLayer = document.getElementById(`bg-${activeBg}`);
+            if(targetLayer) targetLayer.classList.add("active");
+          }
+        });
+      }, { threshold: 0.4 }); 
+
+      sections.forEach(sec => themeObserver.observe(sec));
+
+      // 4. RELATIVE PARALLAX SCROLLING
+      const parallaxEls = document.querySelectorAll('.parallax-el');
+      
+      window.addEventListener('scroll', () => {
+        const scrollY = window.scrollY;
+        
+        // Vertical parallax for backgrounds/suns/videos
+        parallaxEls.forEach(el => {
+          const speed = el.getAttribute('data-speed') || 0.2;
+          const parent = el.closest('section');
+          const rect = parent.getBoundingClientRect();
+          if (rect.top < window.innerHeight && rect.bottom > 0) {
+            const yOffset = rect.top * speed;
+            el.style.transform = `translateY(${yOffset}px)`;
+          }
+        });
+      });
+
+      // 5. CONTACT MENU TOGGLE
+      const contactBtn = document.getElementById('contact-btn');
+      const contactMenu = document.getElementById('contact-menu');
+      contactBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        contactMenu.classList.toggle('show');
+      });
+      document.addEventListener('click', (e) => {
+        if (!contactMenu.contains(e.target) && e.target !== contactBtn) {
+          contactMenu.classList.remove('show');
+        }
+      });
+
+      // 6. AUDIO PLAYER LOGIC
+      const music = document.getElementById("bg-music");
+      const musicBtn = document.getElementById("music-toggle");
+      const musicIcon = document.getElementById("music-icon");
+      let isPlaying = false;
+
+      function toggleMusic() {
+        if (isPlaying) {
+          music.pause();
+          musicIcon.textContent = "🔇";
+          musicBtn.style.animation = "none";
+        } else {
+          music.play();
+          musicIcon.textContent = "🎵";
+          musicBtn.style.animation = "pulse-glow 2s infinite";
+        }
+        isPlaying = !isPlaying;
+      }
+
+      musicBtn.addEventListener("click", function(e) {
+        e.stopPropagation();
+        toggleMusic();
+      });
+
+      document.body.addEventListener("click", function startAudio(e) {
+        if (!isPlaying && e.target.id !== 'btn-google-map' && e.target.id !== 'btn-apple-map') {
+          music.play().then(() => {
+            isPlaying = true;
+            musicIcon.textContent = "🎵";
+            musicBtn.style.animation = "pulse-glow 2s infinite";
+          }).catch(error => console.log("Audio play blocked until interaction:", error));
+        }
+        document.body.removeEventListener("click", startAudio);
+      }, { once: true });
+      
+    });
+
+    // 7. MAP MODAL LOGIC
+    window.openMapModal = function(appleQuery, googleLink) {
+      const q = encodeURIComponent(appleQuery);
+      document.getElementById('btn-google-map').href = googleLink;
+      document.getElementById('btn-apple-map').href = `http://maps.apple.com/?q=${q}`;
+      document.getElementById('map-modal').classList.add('show');
+    };
+    window.closeMapModal = function() {
+      document.getElementById('map-modal').classList.remove('show');
+    };
+  </script>
+</body>
 </html>
