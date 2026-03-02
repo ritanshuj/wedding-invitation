@@ -7,11 +7,11 @@ export default {
         'madhubani-maroon': '#580C1F',
         'madhubani-gold': '#FFD700',
         'madhubani-red': '#D32F2F',
-        'madhubani-yellow': '#FBC02D',
-        'madhubani-teal': '#00796B',
-        'madhubani-orange': '#F57C00',
-        'madhubani-paper': '#FFF9C4',
-        'madhubani-green': '#388E3C'
+        'madhubani-yellow': '#F9A825',
+        'madhubani-teal': '#00695C',
+        'madhubani-orange': '#EF6C00',
+        'madhubani-paper': '#FFFDE7',
+        'madhubani-indigo': '#283593'
       },
       fontFamily: {
         serif: ['"Playfair Display"', 'serif'],

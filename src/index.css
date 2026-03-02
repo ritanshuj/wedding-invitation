@@ -6,48 +6,40 @@
   body { @apply antialiased; }
 }
 
-/* Hand-painted Texture Overlay */
-.hand-paper-texture {
+.handcrafted-overlay {
   position: fixed;
   inset: 0;
   pointer-events: none;
-  opacity: 0.05;
+  opacity: 0.1;
   background-image: url("https://www.transparenttextures.com/patterns/handmade-paper.png");
   z-index: 1000;
 }
 
-.madhubani-border {
+.madhubani-parallex-border {
   position: fixed;
   top: 0;
   bottom: 0;
   width: 80px;
   z-index: 200;
-  background-image: url("data:image/svg+xml,%3Csvg width='80' height='200' viewBox='0 0 80 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%23580C1F' stroke-width='2'%3E%3Ccircle cx='40' cy='40' r='10'/%3E%3Cpath d='M20 70 Q 40 50 60 70 T 20 110 T 60 150' /%3E%3Cpath d='M0 0 L80 0 M0 200 L80 200' /%3E%3Ccircle cx='40' cy='180' r='12' fill='%23FBC02D' fill-opacity='0.3'/%3E%3C/g%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg width='80' height='200' viewBox='0 0 80 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%23580C1F' stroke-width='2'%3E%3Ccircle cx='40' cy='40' r='10'/%3E%3Cpath d='M20 70 Q 40 50 60 70 T 20 110 T 60 150' /%3E%3Ccircle cx='40' cy='180' r='12' fill='%23F9A825' fill-opacity='0.2'/%3E%3C/g%3E%3C/svg%3E");
   background-repeat: repeat-y;
   background-size: contain;
 }
 
-.madhubani-border-left {
-  left: 0;
-  border-right: 4px double #580C1F;
-}
-
-.madhubani-border-right {
-  right: 0;
-  border-left: 4px double #580C1F;
-}
+.madhubani-left { left: 0; border-right: 4px double #580C1F; }
+.madhubani-right { right: 0; border-left: 4px double #580C1F; }
 
 @media (max-width: 1024px) {
-  .madhubani-border { width: 40px; }
-  .main-content { padding: 0 40px; }
+  .madhubani-parallex-border { width: 40px; }
+  .canvas-container { padding: 0 40px; }
 }
 
 @media (min-width: 1025px) {
-  .main-content { padding: 0 80px; }
+  .canvas-container { padding: 0 80px; }
 }
 
-.gold-shimmer {
-  background: linear-gradient(90deg, #FFD700, #FBC02D, #FFD700);
+.glow-title {
+  background: linear-gradient(90deg, #FFD700, #F9A825, #FFD700);
   background-size: 200% auto;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -58,7 +50,12 @@
   to { background-position: 200% center; }
 }
 
-.section-divider {
-  height: 4px;
-  background: repeating-linear-gradient(90deg, #580C1F 0px, #580C1F 20px, #FBC02D 20px, #FBC02D 40px);
+.vibrant-shimmer-card {
+  box-shadow: 15px 15px 0px rgba(88, 12, 31, 1);
+  border: 4px solid #580C1F;
+}
+
+.dotted-pattern {
+  background-image: radial-gradient(#580C1F 1px, transparent 1px);
+  background-size: 20px 20px;
 }

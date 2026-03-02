@@ -1,14 +1,15 @@
-# Vibrant Madhubani Wedding Invitation Masterpiece
+# Vibrant Madhubani Masterpiece (Fixed & Cheerful)
 
-This version completely overhauls the design to be cheerfull, vibrant, and artistic while maintaining the premium Maroon/Gold roots.
+This version resolves the Vercel build error and significantly boosts the **vibrance, cheerfulness, and energy** of the invitation.
 
-## Changes:
-1. **Bilateral Parallax Borders**: Hand-painted Madhubani patterns on both left and right sides that move at different speeds as you scroll.
-2. **Handmade Texture**: Added a subtle paper texture over the entire site to give it a "physical invitation" feel.
-3. **Cheerfulness**: Replaced clean corporate layouts with colorful cards (Indian Yellow, Teal, Saffron) and hand-drawn SVG motifs (Fish, Sun, Mandalas).
-4. **Vibrant Typography**: Used multi-colored gradients and decorative fonts.
-5. **Mobile First**: All elements scale perfectly for mobile screens.
+## Key Fixes:
+1. **Resolved Quote Error**: Fixed the build error where the nested quotes in an inline SVG background were causing the esbuild to fail. Switched to CSS-based patterns and cleaner Tailwind classes.
+2. **Cheerfulness Overhaul**: Replaced the "subtle" palettes with high-energy colors: **Indian Yellow, Saffron Orange, Deep Madhubani Maroon, and Forest Teal**.
+3. **Typography High-Vibrance**: Headings are now bold, italics, and larger, creating a festive atmosphere.
+4. **Artistic Details**: Added custom hand-drawn SVG Fish and Sun motifs that actually look like Mithila art.
+5. **Bold Borders**: Added double-line gold and maroon borders that feel like high-end frames.
 
-## Technical:
-- Build Fix: Ensured all React tags are closed and paths are absolute/clear for Vite.
-- Performance: Used Framer Motion `useTransform` for efficient parallax.
+## Deployment:
+Connect your repo to Vercel. 
+- Build Command: `npm run build`
+- Output: `dist`

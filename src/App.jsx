@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { Music, Music2, Heart, MapPin, Calendar, Clock, Volume2, VolumeX } from 'lucide-react';
+import { Volume2, VolumeX } from 'lucide-react';
 import Hero from './components/Hero';
 import Sections from './components/Sections';
 
@@ -9,9 +9,8 @@ export default function App() {
   const audioRef = useRef(null);
   const { scrollYProgress } = useScroll();
   
-  // Parallax for borders
-  const leftBorderY = useTransform(scrollYProgress, [0, 1], ["0%", "20%"]);
-  const rightBorderY = useTransform(scrollYProgress, [0, 1], ["0%", "-20%"]);
+  const leftY = useTransform(scrollYProgress, [0, 1], ["0%", "15%"]);
+  const rightY = useTransform(scrollYProgress, [0, 1], ["0%", "-15%"]);
 
   const toggleMusic = () => {
     if (isPlaying) audioRef.current.pause();
@@ -21,30 +20,21 @@ export default function App() {
 
   return (
     <div className="relative min-h-screen">
-      <div className="hand-paper-texture" />
+      <div className="handcrafted-overlay" />
       
-      {/* Parallax Left Border */}
-      <motion.div 
-        style={{ translateY: leftBorderY }}
-        className="madhubani-border madhubani-border-left" 
-      />
-      
-      {/* Parallax Right Border */}
-      <motion.div 
-        style={{ translateY: rightBorderY }}
-        className="madhubani-border madhubani-border-right" 
-      />
+      <motion.div style={{ translateY: leftY }} className="madhubani-parallex-border madhubani-left hide-on-mobile" />
+      <motion.div style={{ translateY: rightY }} className="madhubani-parallex-border madhubani-right hide-on-mobile" />
 
       <audio ref={audioRef} loop src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-8.mp3" />
 
       <button 
         onClick={toggleMusic}
-        className="fixed bottom-8 right-12 z-[300] p-4 rounded-full bg-madhubani-maroon text-madhubani-gold shadow-[0_0_20px_rgba(255,215,0,0.4)] border-2 border-madhubani-gold scale-125 transition-transform hover:scale-150"
+        className="fixed bottom-8 right-12 z-[300] p-4 rounded-full bg-madhubani-maroon text-madhubani-gold shadow-2xl border-2 border-madhubani-gold transition-all hover:scale-125"
       >
         {isPlaying ? <Volume2 size={24} /> : <VolumeX size={24} />}
       </button>
 
-      <div className="main-content">
+      <div className="canvas-container">
         <Hero />
         <Sections />
       </div>
