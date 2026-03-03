@@ -6,7 +6,7 @@
 <title>The Wedding of Ritanshu & Ria</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,400&family=Montserrat:wght@300;400;500;600;700&family=Great+Vibes&family=Noto+Serif+Devanagari:wght@400;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,400&family=Montserrat:wght@300;400;500;600;700&family=Great+Vibes&family=Noto+Serif+Devanagari:wght@400;600;700&family=Mukta:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root {
     --text-main: #3E3B35;
@@ -44,7 +44,7 @@
     background: radial-gradient(circle at center, transparent 50%, rgba(163, 122, 44, 0.12) 100%);
   }
 
-  /* WELCOME OVERLAY (For Autoplay Audio) */
+  /* WELCOME OVERLAY */
   #welcome-overlay {
     position: fixed; inset: 0; background: var(--card-bg); z-index: 100000;
     display: flex; flex-direction: column; align-items: center; justify-content: center;
@@ -55,9 +55,22 @@
     padding: 15px 40px; background: var(--crimson); color: white; border: none;
     text-transform: uppercase; letter-spacing: 3px; font-size: 1rem; border-radius: 30px;
     cursor: pointer; box-shadow: 0 10px 20px rgba(158, 42, 43, 0.3); font-family: 'Montserrat', sans-serif;
-    animation: pulse-glow 2s infinite; transition: all 0.3s ease;
+    animation: pulse-glow 2s infinite; transition: all 0.3s ease; font-weight: 600;
   }
   .welcome-btn:hover { background: var(--gold-dark); transform: translateY(-3px); }
+
+  /* ── INTERACTIVE FLOWER PETALS ── */
+  .petal {
+    position: fixed; width: 12px; height: 12px;
+    border-radius: 50% 0 50% 0;
+    pointer-events: none; z-index: 100001;
+    animation: scatter 1.5s ease-out forwards;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  }
+  @keyframes scatter {
+    0% { transform: translate(-50%, -50%) rotate(0deg) scale(0.5); opacity: 1; }
+    100% { transform: translate(calc(-50% + var(--dx)), calc(-50% + var(--dy))) rotate(var(--rot)) scale(1.2); opacity: 0; }
+  }
 
   /* ── 2. COUNTDOWN TOPBAR ── */
   #countdown-bar {
@@ -97,7 +110,6 @@
   .hd-2 { left: 60%; animation-duration: 14s; animation-delay: 3s; bottom: -30vh; }
   @keyframes floatUp { 0% { transform: translateY(50vh) scale(0.5); opacity: 0; } 50% { opacity: 1; } 100% { transform: translateY(-50vh) scale(1.5); opacity: 0; } }
 
-  /* Perfected Marigold Garlands */
   .marigold-garlands {
     position: absolute; top: 0; left: 0; width: 100%; height: 110px; z-index: -1;
   }
@@ -154,8 +166,8 @@
 
   /* ── 5. MASKED VIDEOS & DEVANAGARI TEXT ── */
   .devanagari-title {
-    font-family: 'Noto Serif Devanagari', serif; font-size: 1.6rem; color: var(--crimson);
-    font-weight: 600; margin-bottom: 25px; text-shadow: 1px 1px 3px rgba(255,255,255,0.6); z-index: 2;
+    font-family: 'Noto Serif Devanagari', serif; font-size: 1.8rem; color: var(--crimson);
+    font-weight: 700; margin-bottom: 25px; text-shadow: 1px 1px 3px rgba(255,255,255,0.6); z-index: 2;
   }
 
   .buddha-video-container { 
@@ -183,7 +195,6 @@
   }
 
   /* ── TYPOGRAPHY & LAYOUT ── */
-  h1, h2, h3, .serif { font-family: 'Cormorant Garamond', serif; }
   .script { font-family: 'Great Vibes', cursive; font-size: 3rem; color: var(--crimson); text-shadow: 1px 1px 2px rgba(255,255,255,0.5); }
   
   section { padding: 140px 20px 80px; min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; position: relative; z-index: 10; }
@@ -192,8 +203,7 @@
   .map-btn {
     display: inline-flex; align-items: center; justify-content: center; gap: 6px; margin-top: 15px; padding: 8px 16px;
     background: rgba(212, 175, 55, 0.15); border: 1px solid rgba(212, 175, 55, 0.4); border-radius: 25px;
-    font-family: 'Montserrat', sans-serif; font-size: 0.75rem; font-weight: 500; color: var(--gold-dark);
-    text-transform: uppercase; cursor: pointer; letter-spacing: 1px; text-decoration: none; transition: all 0.3s ease; position: relative; z-index: 10;
+    color: var(--gold-dark); cursor: pointer; text-decoration: none; transition: all 0.3s ease; position: relative; z-index: 10;
   }
   .map-btn:hover { background: var(--gold-dark); color: white; transform: translateY(-2px); }
 
@@ -217,16 +227,15 @@
   }
   .contact-menu.show { opacity: 1; pointer-events: all; transform: translateY(0); }
   .contact-side { padding: 10px 0; }
-  .contact-side:not(:last-child) { border-bottom: 1px solid rgba(212, 175, 55, 0.3); }
   .contact-side h4 {
-    font-family: 'Cinzel', serif; font-size: 0.75rem; color: var(--gold-dark);
-    text-transform: uppercase; letter-spacing: 2px; padding: 5px 20px; margin: 0; background: rgba(212, 175, 55, 0.1);
+    font-family: 'Montserrat', sans-serif; font-size: 0.75rem; color: var(--gold-dark);
+    text-transform: uppercase; font-weight: 700; letter-spacing: 2px; padding: 5px 20px; margin: 0; background: rgba(212, 175, 55, 0.1);
   }
   .contact-menu a {
     padding: 10px 20px; text-decoration: none; color: var(--text-main); font-family: 'Montserrat', sans-serif;
-    font-size: 0.85rem; display: block; transition: background 0.2s; font-weight: 500;
+    font-size: 0.85rem; display: block; transition: background 0.2s; font-weight: 600;
   }
-  .contact-menu a span { font-weight: 300; display: block; font-size: 0.75rem; color: var(--text-light); margin-top: 2px;}
+  .contact-menu a span { font-weight: 400; display: block; font-size: 0.75rem; color: var(--text-light); margin-top: 2px;}
   .contact-menu a:hover { background: rgba(212, 175, 55, 0.1); color: var(--crimson); }
 
   /* UNIVERSAL MAP MODAL */
@@ -271,10 +280,14 @@
   }
   .event-card-inner.dark-mode::before { background: #0f1923; color: var(--gold); }
 
-  .event-title { font-size: 2.8rem; color: var(--crimson); margin-bottom: 10px; font-weight: 600; text-shadow: 1px 1px 2px rgba(0,0,0,0.05); }
-  .event-time { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 3px; color: var(--gold-dark); margin-bottom: 20px; font-weight: 600; }
-  .event-details { font-size: 1.1rem; color: var(--text-main); }
-  .names { font-size: clamp(3.5rem, 10vw, 5.5rem); font-weight: 600; line-height: 1; margin: 10px 0; color: var(--crimson); }
+  .event-title { font-family: 'Noto Serif Devanagari', serif; font-size: 2.8rem; color: var(--crimson); margin-bottom: 10px; font-weight: 700; text-shadow: 1px 1px 2px rgba(0,0,0,0.05); }
+  
+  /* Adjusted for Hindi Time Format */
+  .event-time { font-family: 'Mukta', sans-serif; font-size: 1.05rem; letter-spacing: 1px; color: var(--gold-dark); margin-bottom: 20px; font-weight: 600; }
+  
+  .event-details { font-family: 'Mukta', sans-serif; font-size: 1.15rem; color: var(--text-main); }
+  
+  .names { font-family: 'Cormorant Garamond', serif; font-size: clamp(3.5rem, 10vw, 5.5rem); font-weight: 600; line-height: 1; margin: 10px 0; color: var(--crimson); }
 
   /* Date Layout Matched to Reference Image */
   .new-date-layout {
@@ -282,8 +295,8 @@
     gap: clamp(12px, 4vw, 30px); margin-top: 30px; color: var(--ink);
   }
   .nd-col { display: flex; flex-direction: column; align-items: center; gap: 6px; }
-  .nd-top { font-family: 'Cormorant Garamond', serif; font-size: clamp(13px, 2.5vw, 18px); letter-spacing: 4px; text-transform: uppercase; font-weight: 600; }
-  .nd-bot { font-family: 'Cormorant Garamond', serif; font-size: clamp(12px, 2vw, 15px); letter-spacing: 2px; color: var(--text-light); }
+  .nd-top { font-family: 'Montserrat', sans-serif; font-size: clamp(13px, 2.5vw, 18px); letter-spacing: 4px; text-transform: uppercase; font-weight: 600; }
+  .nd-bot { font-family: 'Montserrat', sans-serif; font-size: clamp(12px, 2vw, 15px); letter-spacing: 2px; color: var(--text-light); }
   .nd-center { display: flex; align-items: center; gap: clamp(12px, 4vw, 30px); }
   .nd-line { width: 1.5px; height: 50px; background-color: var(--gold); opacity: 0.7; }
   .nd-day { font-family: 'Cormorant Garamond', serif; font-size: clamp(48px, 8vw, 68px); color: var(--crimson); line-height: 1; }
@@ -296,7 +309,10 @@
   .btn {
     display: inline-block; margin-top: 40px; padding: 15px 40px; background: var(--crimson); color: white;
     text-transform: uppercase; letter-spacing: 3px; font-size: 0.85rem; text-decoration: none; border-radius: 30px;
-    transition: all 0.3s ease; box-shadow: 0 10px 20px rgba(158, 42, 43, 0.3); font-weight: 600;
+    font-family: 'Montserrat', sans-serif; transition: all 0.3s ease; box-shadow: 0 10px 20px rgba(158, 42, 43, 0.3); font-weight: 600;
+  }
+  .btn.hindi-btn {
+    font-family: 'Mukta', sans-serif; font-size: 1.1rem; letter-spacing: 1px; text-transform: none;
   }
   .btn:hover { background: var(--gold-dark); transform: translateY(-3px); box-shadow: 0 15px 25px rgba(163, 122, 44, 0.4); }
 
@@ -307,15 +323,15 @@
   <div id="vignette"></div>
 
   <div id="welcome-overlay">
-    <h2 style="font-family: 'Great Vibes', cursive; font-size: clamp(3.5rem, 8vw, 5rem); color: var(--crimson); margin-bottom: 10px;">Ritanshu & Ria</h2>
-    <p style="font-family: 'Montserrat', sans-serif; font-size: 0.8rem; letter-spacing: 3px; margin-bottom: 40px; color: var(--gold-dark);">INVITE YOU TO CELEBRATE</p>
+    <h2 style="font-family: 'Great Vibes', cursive; font-size: clamp(3.5rem, 8vw, 5rem); color: var(--crimson); margin-bottom: 10px;">Ritanshu <span style="font-size: 0.6em; color: var(--gold); font-family: 'Cormorant Garamond', serif;">&</span> Ria</h2>
+    <p style="font-family: 'Montserrat', sans-serif; font-size: 0.8rem; letter-spacing: 3px; margin-bottom: 40px; color: var(--gold-dark); font-weight: 500;">INVITE YOU TO CELEBRATE</p>
     <button id="open-invite-btn" class="welcome-btn">Open Invitation</button>
   </div>
 
   <div id="map-modal" class="map-modal">
     <div class="map-modal-content">
        <h3 style="font-family: 'Cormorant Garamond', serif; color: var(--crimson); font-size: 1.8rem; margin-bottom: 15px; font-weight: 600;">Choose Map App</h3>
-       <p style="font-size: 0.9rem; color: var(--text-light); margin-bottom: 20px;">How would you like to navigate to the venue?</p>
+       <p style="font-size: 0.9rem; color: var(--text-light); margin-bottom: 20px; font-family: 'Montserrat', sans-serif;">How would you like to navigate to the venue?</p>
        <a id="btn-google-map" href="#" target="_blank" class="btn" style="display: block; margin-top: 10px; width: 100%; box-sizing: border-box;">Google Maps</a>
        <a id="btn-apple-map" href="#" target="_blank" class="btn" style="display: block; margin-top: 15px; background: var(--gold-dark); width: 100%; box-sizing: border-box;">Apple Maps</a>
        <button onclick="closeMapModal()" style="margin-top: 25px; background: none; border: none; color: var(--text-light); font-size: 0.9rem; text-decoration: underline; cursor: pointer; font-family: 'Montserrat', sans-serif;">Cancel</button>
@@ -323,13 +339,9 @@
   </div>
 
   <div id="contact-menu" class="contact-menu">
-    <div class="contact-side">
+    <div class="contact-side" style="border-bottom: none;">
       <h4>Groom's Side</h4>
       <a href="tel:+919452803990">Shri. Ranjul Jayant Gautam <span>📞 +91 94528 03990</span></a>
-    </div>
-    <div class="contact-side" style="border-bottom: none;">
-      <h4>Bride's Side</h4>
-      <a href="tel:+919453396502">Shri. OmPrakash Keshari <span>📞 +91 94533 96502</span></a>
     </div>
   </div>
   <button id="contact-btn" class="contact-btn" aria-label="Contact Us">📞</button>
@@ -371,7 +383,7 @@
       </div>
       <h2 class="devanagari-title">नमो बुद्धाय</h2>
 
-      <div class="script" style="margin-top: 20px;">Celebrating the union of</div>
+      <div class="script" style="margin-top: 10px; font-family: 'Noto Serif Devanagari', serif; font-size: 1.8rem; color: var(--gold-dark); font-style: normal; text-shadow: none;">के पावन परिणय सूत्र में</div>
       <h1 class="names">Ritanshu<br><span style="font-size: 3.5rem; color: var(--gold); font-style: italic;">&</span><br>Ria</h1>
       
       <div class="new-date-layout">
@@ -389,7 +401,7 @@
           <span class="nd-bot">2026</span>
         </div>
       </div>
-      <p style="margin-top:15px; font-family:'Cinzel',serif; font-size:clamp(9px,1.4vw,12px); letter-spacing:3px; color:var(--text-light); text-transform:uppercase;">CITY CLUB · LUCKNOW, UP</p>
+      <p style="margin-top:15px; font-family:'Montserrat',sans-serif; font-size:clamp(9px,1.4vw,12px); font-weight:600; letter-spacing: 2px; color:var(--text-light); text-transform:uppercase;">City Club · Lucknow, UP</p>
       
     </div>
   </section>
@@ -397,30 +409,30 @@
   <section id="blessings" data-bg="default" style="min-height: 60vh;">
     <div class="reveal" style="max-width: 800px; padding: 40px 20px; text-align: center; position: relative; z-index: 10;">
       
-      <h2 style="font-family:'Noto Serif Devanagari', serif; font-size: 2.2rem; color: var(--crimson); margin-bottom: 15px; font-weight: 600;">बुद्धं शरणं गच्छामि</h2>
+      <h2 style="font-family:'Noto Serif Devanagari', serif; font-size: 2.2rem; color: var(--crimson); margin-bottom: 15px; font-weight: 700;">बुद्धं शरणं गच्छामि</h2>
       
-      <p style="font-size: 1.25rem; font-weight: 300; color: var(--text-main); font-style: italic;">
-        "Radiate boundless love towards the entire world — above, below, and across — unhindered, without ill will, without enmity."<br>
-        <span style="font-size: 0.9rem; font-style: normal; color: var(--gold-dark); display: block; margin-top: 15px; text-transform: uppercase; letter-spacing: 2px;">— The Metta Sutta</span>
+      <p style="font-family: 'Mukta', sans-serif; font-size: 1.25rem; font-weight: 400; color: var(--text-main); font-style: italic;">
+        "सम्पूर्ण विश्व के प्रति असीम प्रेम का प्रसार करें — ऊपर, नीचे, और चारों ओर — बिना किसी बाधा, बिना किसी दुर्भावना और बिना किसी शत्रुता के।"<br>
+        <span style="font-size: 1rem; font-style: normal; color: var(--gold-dark); display: block; margin-top: 15px; font-weight: 600;">— मेत्त सुत्त</span>
       </p>
 
       <div style="margin-top: 50px; padding-top: 40px; border-top: 1px dashed rgba(212, 175, 55, 0.4);">
-        <h3 style="font-family:'Playfair Display', serif; font-size: 2rem; color: var(--crimson); font-style: italic; margin-bottom: 15px;">You are Cordially Invited</h3>
-        <p style="font-size: 1.15rem; color: var(--text-main); line-height: 1.8; margin-bottom: 40px; max-width: 650px; margin-left: auto; margin-right: auto;">
-          We joyfully invite you and your family to share in our happiness as we embark on a new journey together. Your presence, love, and blessings will make our celebrations truly complete.
+        <h3 style="font-family:'Noto Serif Devanagari', serif; font-size: 2.2rem; color: var(--crimson); margin-bottom: 15px; font-weight: 700;">सप्रेम निमंत्रण</h3>
+        <p style="font-family: 'Mukta', sans-serif; font-size: 1.15rem; color: var(--text-main); line-height: 1.8; margin-bottom: 40px; max-width: 650px; margin-left: auto; margin-right: auto; font-weight: 500;">
+          हम अपने जीवन के इस नए और शुभ सफर की शुरुआत के अवसर पर आपको सपरिवार आमंत्रित करते हैं। आपकी उपस्थिति, प्रेम और आशीर्वाद इस समारोह को पूर्णता प्रदान करेंगे।
         </p>
       </div>
 
       <div>
-        <p style="font-family:'Cinzel', serif; font-size: 0.85rem; color: var(--gold-dark); text-transform: uppercase; letter-spacing: 3px;">With the blessings of</p>
+        <p style="font-family:'Montserrat', sans-serif; font-size: 0.85rem; color: var(--gold-dark); text-transform: uppercase; letter-spacing: 3px; font-weight: 600;">With the blessings of</p>
         <div style="display: flex; justify-content: center; gap: clamp(20px, 5vw, 60px); margin-top: 20px; flex-wrap: wrap;">
            <div>
               <p style="font-family:'Cormorant Garamond', serif; font-size: 1.4rem; color: var(--text-main); font-weight: 600; line-height: 1.4;">Smt. Dharmpriya Gautam<br><span style="font-style: italic; color: var(--gold-dark); font-size: 1.1rem;">&</span> Shri. Ranjul Jayant Gautam</p>
-              <p style="font-size: 0.75rem; color: var(--text-light); text-transform: uppercase; letter-spacing: 1px; margin-top: 8px; font-weight: 600;">(Parents of the Groom)</p>
+              <p style="font-family:'Montserrat', sans-serif; font-size: 0.75rem; color: var(--text-light); text-transform: uppercase; letter-spacing: 1px; margin-top: 8px; font-weight: 600;">(Parents of the Groom)</p>
            </div>
            <div>
               <p style="font-family:'Cormorant Garamond', serif; font-size: 1.4rem; color: var(--text-main); font-weight: 600; line-height: 1.4;">Smt. Usha Keshari<br><span style="font-style: italic; color: var(--gold-dark); font-size: 1.1rem;">&</span> Shri. OmPrakash Keshari</p>
-              <p style="font-size: 0.75rem; color: var(--text-light); text-transform: uppercase; letter-spacing: 1px; margin-top: 8px; font-weight: 600;">(Parents of the Bride)</p>
+              <p style="font-family:'Montserrat', sans-serif; font-size: 0.75rem; color: var(--text-light); text-transform: uppercase; letter-spacing: 1px; margin-top: 8px; font-weight: 600;">(Parents of the Bride)</p>
            </div>
         </div>
       </div>
@@ -439,17 +451,17 @@
     <div class="haldi-dust hd-2 parallax-el" data-speed="0.6"></div>
 
     <div class="reveal" style="margin-bottom: -20px; margin-top: 60px;">
-      <h2 class="script" style="font-size: 3.5rem;">An Auspicious Beginning</h2>
+      <h2 class="script" style="font-family: 'Noto Serif Devanagari', serif; font-size: 2.8rem; font-style: normal; color: var(--crimson);">शुभ शुरुआत</h2>
     </div>
     <div class="event-card reveal">
       <div class="event-card-inner">
-        <h3 class="event-title serif">Haldi Ceremony</h3>
-        <p class="event-time">06 MAY 2026 · 5:00 PM</p>
+        <h3 class="event-title">हल्दी समारोह</h3>
+        <p class="event-time">06 मई 2026 · सायं 5:00 बजे</p>
         <p class="event-details">
-          <strong>Our residence</strong><br><br>
-          Join us under the morning sun to bless the bride and groom with golden turmeric. A morning of bright colors, joy, and laughter.<br><br>
+          <strong style="font-family: 'Mukta', sans-serif; font-size: 1.15rem;">हमारा निवास</strong><br><br>
+          सुनहरी हल्दी के साथ आशीर्वाद देने के लिए हमारे साथ जुड़ें। चमकीले रंगों, उल्लास और हँसी-खुशी से भरा एक खूबसूरत अवसर।<br><br>
         </p>
-        <button onclick="openMapModal('Our residence', 'https://maps.app.goo.gl/yRGLnpj2GTTnx23B9')" class="map-btn">📍 Locate on Map</button>
+        <button onclick="openMapModal('https://maps.apple/p/c45MEf1ShTHRzi', 'https://maps.app.goo.gl/xu7YesoDFgNMs5gv5')" class="map-btn" style="font-family: 'Mukta', sans-serif; text-transform: none; font-size: 1rem; letter-spacing: 0.5px;">📍 मैप पर देखें</button>
       </div>
     </div>
   </section>
@@ -462,17 +474,17 @@
     </div>
 
     <div class="reveal" style="margin-bottom: -20px; margin-top: 60px;">
-      <h2 class="script" style="font-size: 3.5rem; color: var(--card-bg);">An Evening of Art</h2>
+      <h2 class="script" style="font-family: 'Noto Serif Devanagari', serif; font-size: 2.8rem; font-style: normal; color: var(--card-bg);">रंगारंग संध्या</h2>
     </div>
     <div class="event-card reveal">
       <div class="event-card-inner">
-        <h3 class="event-title serif">Mehendi & Sangeet</h3>
-        <p class="event-time">06 MAY 2026 · 7:00 PM</p>
+        <h3 class="event-title">मेहंदी एवं संगीत</h3>
+        <p class="event-time">06 मई 2026 · सायं 7:00 बजे</p>
         <p class="event-details">
-          <strong>Our residence</strong><br><br>
-          As the sun sets, join us for an evening of intricate henna designs, vibrant folk music, and joyous dancing beneath the twilight sky.<br><br>
+          <strong style="font-family: 'Mukta', sans-serif; font-size: 1.15rem;">हमारा निवास</strong><br><br>
+          शाम ढलते ही, हाथों में रचती खूबसूरत मेहंदी, लोक संगीत की मधुर धुनों और अपनों के संग नृत्य व उल्लास भरी इस शाम में शामिल हों।<br><br>
         </p>
-        <button onclick="openMapModal('Our residence', 'https://maps.app.goo.gl/yRGLnpj2GTTnx23B9')" class="map-btn">📍 Locate on Map</button>
+        <button onclick="openMapModal('https://maps.apple/p/c45MEf1ShTHRzi', 'https://maps.app.goo.gl/xu7YesoDFgNMs5gv5')" class="map-btn" style="font-family: 'Mukta', sans-serif; text-transform: none; font-size: 1rem; letter-spacing: 0.5px;">📍 मैप पर देखें</button>
       </div>
     </div>
   </section>
@@ -482,7 +494,7 @@
     <div class="spotlight sl-2 parallax-el" data-speed="0.1"></div>
     
     <div class="reveal" style="width: 100%; text-align: center; margin-bottom: -15px; position: relative; z-index: 4;">
-       <h2 class="script" style="font-size: clamp(3rem, 8vw, 4.5rem); color: var(--crimson); text-shadow: 2px 2px 4px rgba(255,255,255,0.9), -1px -1px 0px rgba(255,255,255,1), 0 0 15px rgba(255,255,255,0.8);">The Grand Celebration</h2>
+       <h2 class="script" style="font-family: 'Noto Serif Devanagari', serif; font-size: clamp(2.5rem, 7vw, 3.5rem); font-style: normal; color: var(--crimson); text-shadow: 2px 2px 4px rgba(255,255,255,0.9), -1px -1px 0px rgba(255,255,255,1), 0 0 15px rgba(255,255,255,0.8);">मुख्य समारोह</h2>
     </div>
 
     <div class="reveal parallax-el edge-video-wrapper" data-speed="0.05" style="z-index: 2;">
@@ -500,13 +512,13 @@
         <div class="fw fw-5"></div>
 
         <div style="position: relative; z-index: 2;">
-          <h3 class="event-title serif">Wedding & Reception</h3>
-          <p class="event-time">08 MAY 2026 · 5:00 PM</p>
+          <h3 class="event-title">शुभ विवाह एवं प्रीतिभोज</h3>
+          <p class="event-time">08 मई 2026 · सायं 5:00 बजे</p>
           <p class="event-details">
-            <strong>City club, kursi road, Lucknow, UP</strong><br><br>
-            The evening begins with the joyful Baraat, followed by a serene wedding ceremony. Afterwards, celebrate the newlyweds with a grand dinner, toasts, and dancing under the stars.<br><br>
+            <strong style="font-family: 'Mukta', sans-serif; font-size: 1.15rem;">सिटी क्लब, कुर्सी रोड, लखनऊ, उ.प्र.</strong><br><br>
+            शाम की शुरुआत उल्लास भरी बारात से होगी, जिसके पश्चात शांतिपूर्ण विवाह संपन्न होगा। इसके उपरांत नवदंपति को आशीर्वाद देने के लिए आयोजित भव्य रात्रिभोज एवं प्रीतिभोज में अवश्य पधारें।<br><br>
           </p>
-          <button onclick="openMapModal('City club, kursi road, Lucknow', 'google.com/maps/place/City+Club,+Lucknow/data=!4m2!3m1!1s0x0:0x73ae2ec765787710?sa=X&ved=1t:2428&hl=en&ictx=111')" class="map-btn">📍 Locate on Map</button>
+          <button onclick="openMapModal('https://maps.apple/p/eDW~c~cQ-ibRs8', 'https://maps.app.goo.gl/P5FUUybFFifGXstm7')" class="map-btn" style="font-family: 'Mukta', sans-serif; text-transform: none; font-size: 1rem; letter-spacing: 0.5px;">📍 मैप पर देखें</button>
         </div>
       </div>
     </div>
@@ -514,9 +526,9 @@
 
   <section id="rsvp" data-bg="default" style="min-height: 30vh; padding-top: 20px; padding-bottom: 40px;">
     <div class="reveal" style="text-align: center; padding: 20px;">
-      <h2 class="script" style="font-size: 4rem; color: var(--gold-dark);">Kindly Reply</h2>
+      <h2 class="script" style="font-family: 'Noto Serif Devanagari', serif; font-size: 2.8rem; font-weight: 700; font-style: normal; color: var(--gold-dark);">उपस्थिति की पुष्टि</h2>
       
-      <a href="https://docs.google.com/forms/d/e/1FAIpQLSfSLz_HSQ34jJdqWOWUKx2DBI4mZ_-acpguZ-0UL7wFvvizHA/viewform?usp=publish-editor" target="_blank" class="btn">Confirm Attendance</a>
+      <a href="https://docs.google.com/forms/d/e/1FAIpQLSfSLz_HSQ34jJdqWOWUKx2DBI4mZ_-acpguZ-0UL7wFvvizHA/viewform?usp=publish-editor" target="_blank" class="btn hindi-btn">उपस्थिति दर्ज़ करें</a>
       
     </div>
   </section>
@@ -524,7 +536,7 @@
   <script>
     document.addEventListener("DOMContentLoaded", function() {
       
-      // 1. COUNTDOWN TIMER
+      // Countdown Timer
       const weddingDate = new Date("May 08, 2026 17:00:00").getTime();
       const dayEl = document.getElementById("cd-days");
       const hrEl = document.getElementById("cd-hours");
@@ -545,7 +557,6 @@
         secEl.innerText = String(Math.floor((distance % (1000 * 60)) / 1000)).padStart(2, '0');
       }, 1000);
 
-      // 2. SCROLL REVEAL FOR TEXT CARDS
       const reveals = document.querySelectorAll(".reveal");
       const revealOnScroll = new IntersectionObserver((entries, observer) => {
         entries.forEach(entry => {
@@ -557,7 +568,6 @@
       }, { threshold: 0.15, rootMargin: "0px 0px -50px 0px" });
       reveals.forEach(reveal => { revealOnScroll.observe(reveal); });
 
-      // 3. BACKGROUND THEME OBSERVER
       const sections = document.querySelectorAll("section[data-bg]");
       const bgLayers = document.querySelectorAll(".bg-layer");
 
@@ -574,13 +584,10 @@
 
       sections.forEach(sec => themeObserver.observe(sec));
 
-      // 4. RELATIVE PARALLAX SCROLLING
       const parallaxEls = document.querySelectorAll('.parallax-el');
       
       window.addEventListener('scroll', () => {
         const scrollY = window.scrollY;
-        
-        // Vertical parallax for backgrounds/suns/videos
         parallaxEls.forEach(el => {
           const speed = el.getAttribute('data-speed') || 0.2;
           const parent = el.closest('section');
@@ -592,7 +599,6 @@
         });
       });
 
-      // 5. CONTACT MENU TOGGLE
       const contactBtn = document.getElementById('contact-btn');
       const contactMenu = document.getElementById('contact-menu');
       contactBtn.addEventListener('click', (e) => {
@@ -605,7 +611,6 @@
         }
       });
 
-      // 6. AUDIO PLAYER & WELCOME OVERLAY LOGIC
       const music = document.getElementById("bg-music");
       const musicBtn = document.getElementById("music-toggle");
       const musicIcon = document.getElementById("music-icon");
@@ -613,7 +618,6 @@
       const openBtn = document.getElementById("open-invite-btn");
       let isPlaying = false;
 
-      // When they click "Open Invitation", hide overlay and start music
       openBtn.addEventListener("click", function() {
         welcomeOverlay.classList.add("hidden");
         music.play().then(() => {
@@ -640,14 +644,81 @@
         e.stopPropagation();
         toggleMusic();
       });
+
+      // Avoid capturing music play attempt if clicking on specific buttons
+      document.body.addEventListener("click", function startAudio(e) {
+        if (!isPlaying && e.target.id !== 'btn-google-map' && e.target.id !== 'btn-apple-map' && e.target.id !== 'open-invite-btn') {
+          music.play().then(() => {
+            isPlaying = true;
+            musicIcon.textContent = "🎵";
+            musicBtn.style.animation = "pulse-glow 2s infinite";
+          }).catch(error => console.log("Audio play blocked until interaction:", error));
+        }
+        document.body.removeEventListener("click", startAudio);
+      }, { once: true });
+
+
+      // FLOWER SHOWER EFFECT
+      function createPetal(x, y) {
+        const petal = document.createElement('div');
+        petal.classList.add('petal');
+        // Marigold orange, yellow, and red tones
+        const colors = ['#F5920A', '#FAD080', '#D84020', '#FFD700', '#FF6B6B'];
+        petal.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+        petal.style.left = x + 'px';
+        petal.style.top = y + 'px';
+        
+        const angle = Math.random() * Math.PI * 2;
+        const velocity = 30 + Math.random() * 80;
+        const dx = Math.cos(angle) * velocity + 'px';
+        const dy = (Math.sin(angle) * velocity + 100) + 'px'; // Fall slightly downwards
+        const rot = (Math.random() * 360) + 'deg';
+        
+        petal.style.setProperty('--dx', dx);
+        petal.style.setProperty('--dy', dy);
+        petal.style.setProperty('--rot', rot);
+        
+        document.body.appendChild(petal);
+        setTimeout(() => petal.remove(), 1500); // Clean up after animation
+      }
+
+      function triggerShower(e) {
+        let x, y;
+        if (e.touches && e.touches.length > 0) {
+          x = e.touches[0].clientX;
+          y = e.touches[0].clientY;
+        } else {
+          x = e.clientX;
+          y = e.clientY;
+        }
+        
+        // Create a small burst of petals
+        const numPetals = 4 + Math.floor(Math.random() * 3);
+        for(let i=0; i<numPetals; i++) {
+          createPetal(x, y);
+        }
+      }
+
+      let lastShowerTime = 0;
+      function throttledShower(e) {
+        const now = Date.now();
+        // Shower every 150ms while scrolling
+        if (now - lastShowerTime > 150) {
+          triggerShower(e);
+          lastShowerTime = now;
+        }
+      }
+
+      // Add event listeners for interaction
+      document.addEventListener('click', triggerShower);
+      document.addEventListener('touchstart', triggerShower, {passive: true});
+      document.addEventListener('touchmove', throttledShower, {passive: true});
       
     });
 
-    // 7. MAP MODAL LOGIC
-    window.openMapModal = function(appleQuery, googleLink) {
-      const q = encodeURIComponent(appleQuery);
+    window.openMapModal = function(appleLink, googleLink) {
       document.getElementById('btn-google-map').href = googleLink;
-      document.getElementById('btn-apple-map').href = `http://maps.apple.com/?q=${q}`;
+      document.getElementById('btn-apple-map').href = appleLink;
       document.getElementById('map-modal').classList.add('show');
     };
     window.closeMapModal = function() {
